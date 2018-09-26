@@ -9,14 +9,19 @@ const ItemForm = props => {
 
   const handleSubmit = ev => {
     ev.preventDefault()
-    const { itemName, cost: stringCost, date, person } = ev.currentTarget.elements
+    const { itemName, cost: stringCost, category, date, person } = ev.currentTarget.elements
     const cost = convertToNumAndRemoveDSign(stringCost.value)
-    props.handleSubmit({
-      itemName: itemName.value,
-      cost,
-      date: new Date(date.value).toISOString(),
-      person: person.value,
-    })
+    const elements = Array.from(ev.currentTarget.elements)
+    const shouldContinue = !elements.some(el => el.required && el.value === '')
+    if (shouldContinue) {
+      props.onSubmit({
+        itemName: itemName.value,
+        cost,
+        category: category.value,
+        date: new Date(date.value).toISOString(),
+        person: person.value,
+      })
+    }
   }
 
   return (
@@ -24,19 +29,21 @@ const ItemForm = props => {
       <form onSubmit={handleSubmit}>
         <h4>Enter your purchase</h4>
         <label htmlFor="itemName">Item Name</label>
-        <input type="text" id="itemName" placeholder="Ramen Noodles" />
+        <input type="text" id="itemName" placeholder="Ramen Noodles" required />
         <label htmlFor="cost">Item Cost</label>
-        <CostInput id="cost" placeholder="$3.78" />
+        <CostInput id="cost" placeholder="$3.78" required />
+        <label htmlFor="category">Item Category</label>
+        <input type="text" id="category" placeholder="Groceries" required />
         <label htmlFor="date">Date of Purchase</label>
-        <input type="date" id="date" defaultValue={nowForInput} />
+        <input type="date" id="date" defaultValue={nowForInput} required />
         <label htmlFor="person">Purchaser</label>
-        <input type="text" id="person" placeholder="Brianna" />
+        <input type="text" id="person" placeholder="Brianna" required />
         <fieldset>
           <legend>Transaction Type</legend>
           <label htmlFor="expenseInput">Expense</label>
-          <input type="radio" id="expenseInput" defaultChecked />
+          <input type="radio" name="Transaction Type" id="expenseInput" defaultChecked />
           <label htmlFor="incomeInput">Income</label>
-          <input type="radio" id="incomeInput" />
+          <input type="radio" name="Transaction Type" id="incomeInput" />
         </fieldset>
         <button type="submit" onSubmit={handleSubmit}>
           Submit
@@ -49,11 +56,9 @@ const ItemForm = props => {
 export default ItemForm
 
 ItemForm.propTypes = {
-  handleSubmit: PropTypes.func,
+  onSubmit: PropTypes.func,
 }
 
 ItemForm.defaultProps = {
-  handleSubmit: data => {
-    // console.log(data)
-  },
+  onSubmit: data => {},
 }

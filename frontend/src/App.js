@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ThemeProvider } from 'styled-components'
-import './App.css'
+import './styles/App.css'
 import ItemForm from './ItemForm'
 import RecentPurchases from './RecentPurchases'
 import BudgetItem from './BudgetItem'
@@ -16,11 +16,18 @@ const theme = {
 }
 
 class App extends Component {
+  state = {
+    items: [],
+  }
+  handleSubmit = obj => {
+    this.setState(state => ({ items: [...state.items, obj] }))
+  }
+
   render() {
     return (
       <ThemeProvider theme={theme}>
         <div className="hi" data-testid="app">
-          <ItemForm />
+          <ItemForm onSubmit={this.handleSubmit} />
           <RecentPurchases />
           <BudgetItem />
         </div>

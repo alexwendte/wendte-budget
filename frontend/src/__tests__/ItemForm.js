@@ -7,80 +7,89 @@ afterEach(cleanup)
 const setup = propOverrides => {
   const props = Object.assign(
     {
-      handleSubmit: jest.fn(),
+      onSubmit: jest.fn(),
     },
     propOverrides
   )
+
   const utils = render(<ItemForm {...props} />)
+
+  const fakeForm = {
+    name: 'SSD',
+    cost: '$23',
+    category: 'Groceries',
+    date: '2018-09-14',
+    person: 'Alex',
+  }
+  utils.getByLabelText('Item Name').value = fakeForm.name
+  utils.getByLabelText('Item Cost').value = fakeForm.cost
+  utils.getByLabelText('Item Category').value = fakeForm.category
+  utils.getByLabelText('Purchaser').value = fakeForm.person
 
   const submitButton = utils.getByText('Submit')
   return {
     props,
     submitButton,
+    fakeForm,
     ...utils,
   }
 }
 
 describe('rendering', () => {
-  it('renders title', () => {
-    const { getByText } = setup()
-    expect(getByText('Enter your purchase')).toBeTruthy()
-  })
+  it("starts with today's date", () => {
+    const { getByLabelText } = setup()
+    const dateInput = getByLabelText('Date of Purchase')
+    const now = new Date(Date.now())
+    const resDate = now.toISOString().slice(0, 10)
 
-  describe('date input', () => {
-    it("starts with today's date", () => {
-      const { getByLabelText } = setup()
-      const dateInput = getByLabelText('Date of Purchase')
-      const now = new Date(Date.now())
-      const resDate = now.toISOString().slice(0, 10)
-      expect(dateInput.value).toBe(resDate)
-    })
+    expect(dateInput.value).toBe(resDate)
+  })
+  it('starts with expense checked', () => {
+    const { getByLabelText } = setup()
+
+    expect(getByLabelText('Expense').checked).toBeTruthy()
+    expect(getByLabelText('Income').checked).not.toBeTruthy()
   })
 })
 
 describe('interaction', () => {
-  // Also, how do I want to display bank account info?
-
-  it.skip('should not allow a form with any blank required fields to be submitted', () => {
-    const { getByLabelText, props, getByTestId, submitButton } = setup()
-    const values = ['SSD', null, '2018-09-14', 'Alex'];
-[
-      getByLabelText('Item Name').value,
-      getByLabelText('Item Cost').value,
-      getByLabelText('Date of Purchase').value,
-      getByLabelText('Purchaser').value,
-    ] = values
-    const numberDate = 1536883200000
-    getByLabelText('date').valueAsNumber = numberDate
-
-    fireEvent.click(submitButton)
-    expect(props.handleSubmit).toHaveBeenCalledTimes(0)
-    // See if I can make sure it is failing with the type "Insufficient information"
-    expect(getByTestId('submitFailed')).toBeDefined()
-  })
-  it('submits form with correct values', () => {
+  it('should not allow a form with any blank required fields to be submitted', () => {
     const { getByLabelText, props, submitButton } = setup()
-    const values = ['SSD', '$23', '2018-09-14', 'Alex'];
-[
-      getByLabelText('Item Name').value,
-      getByLabelText('Item Cost').value,
-      getByLabelText('Date of Purchase').value,
-      getByLabelText('Purchaser').value,
-    ] = values
-    const numberDate = 1536883200000
-    const valueAfterStrip = 23
-    getByLabelText('Date of Purchase').valueAsNumber = numberDate
-    expect(getByLabelText('Expense').checked).toBeTruthy()
-    expect(getByLabelText('Income').checked).not.toBeTruthy()
+    getByLabelText('Item Cost').value = ''
 
     fireEvent.click(submitButton)
-    expect(props.handleSubmit).toHaveBeenCalledTimes(1)
-    expect(props.handleSubmit).toHaveBeenCalledWith({
-      itemName: values[0],
+
+    expect(props.onSubmit).toHaveBeenCalledTimes(0)
+  })
+
+  it('submits form with correct values', () => {
+    const { props, submitButton, fakeForm, getByLabelText } = setup()
+    const valueAfterStrip = 23
+    getByLabelText('Date of Purchase').value = fakeForm.date
+
+    fireEvent.click(submitButton)
+
+    expect(props.onSubmit).toHaveBeenCalledTimes(1)
+    expect(props.onSubmit).toHaveBeenCalledWith({
+      itemName: fakeForm.name,
       cost: valueAfterStrip,
-      date: new Date(numberDate).toISOString(),
-      person: values[3],
+      category: 'Groceries',
+      date: new Date(fakeForm.date).toISOString(),
+      person: fakeForm.person,
     })
+  })
+
+  it('should only allow Expense or Income to be selected', () => {
+    const { getByLabelText } = setup()
+    const income = getByLabelText('Income')
+    const expense = getByLabelText('Expense')
+    expect(expense.checked).toBeTruthy()
+    expect(income.checked).not.toBeTruthy()
+
+    fireEvent.change(income, { target: { checked: true } })
+
+    expect(income.checked).toBeTruthy()
+    expect(expense.checked).not.toBeTruthy()
   })
 })
 
