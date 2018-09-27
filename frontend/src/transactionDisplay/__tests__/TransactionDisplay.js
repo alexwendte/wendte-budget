@@ -1,40 +1,35 @@
 import React from 'react'
-import { render, cleanup, fireEvent } from 'react-testing-library'
+import { render, cleanup } from 'react-testing-library'
+import { transactions as fakeTransactions } from 'utils/fakeData'
 import TransactionDisplay from '../TransactionDisplay'
-import * as fakeData from '../fakeData'
 
 afterEach(cleanup)
 
 const setup = propOverrides => {
   const props = Object.assign(
     {
-      handleSubmit: jest.fn(),
+      items: fakeTransactions,
     },
     propOverrides
   )
 
-  const utils = render(<TransactionDisplay />)
+  const utils = render(<TransactionDisplay {...props} />)
 
   return {
     props,
-    fakeData,
     ...utils,
   }
 }
-describe('render', () => {
-  it('should display the top 10 most recent transactions', () => {
-    const { getByText, getByTestId } = setup()
-    const trans = fakeData.transactions
 
-    expect(getByTestId('transactions').children.length).toBe(10)
-
-    expect(getByText(trans[0].itemName)).not.toBeNull()
-    expect(getByText(trans[0].cost.toString(10))).not.toBeNull()
-    expect(getByText(new Date(trans[0].date).toISOString())).not.toBeNull()
-    expect(getByText(trans[0].person)).not.toBeNull()
+describe('rendering', () => {
+  it('renders all of the items', () => {
+    const { getByText, props } = setup()
+    props.items.forEach(item => {
+      expect(getByText(item.name)).toBeTruthy()
+    })
   })
 })
 
-describe('lifecycle', () => {
-  it('should get recent data from the db')
-})
+describe('interaction', () => {})
+
+describe('lifecycle', () => {})

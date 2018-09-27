@@ -25,7 +25,7 @@ const ItemForm = props => {
   }
 
   return (
-    <div data-testid="item-form">
+    <div className="item-form">
       <form onSubmit={handleSubmit}>
         <h4>Enter your purchase</h4>
         <label htmlFor="itemName">Item Name</label>

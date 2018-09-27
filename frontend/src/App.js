@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import { ThemeProvider } from 'styled-components'
 import './styles/App.css'
 import ItemForm from './ItemForm'
-import RecentPurchases from './RecentPurchases'
-import BudgetItem from './BudgetItem'
+import TransactionDisplay from './transactionDisplay/TransactionDisplay'
+import { transactions as fakeTransactions } from 'utils/fakeData'
 
 const theme = {
   red: '#FF0000',
-  black: '#393939',
+  black: '#222222',
   grey: '#3A3A3A',
-  lightGray: '#E1E1E1',
+  lightGrey: '#E1E1E1',
   offWhite: '#EDEDED',
   maxWidth: '1000px',
   bs: '0 12px 24px 0 rgba(0, 0, 0, 0.09)',
@@ -17,8 +17,9 @@ const theme = {
 
 class App extends Component {
   state = {
-    items: [],
+    items: fakeTransactions,
   }
+
   handleSubmit = obj => {
     this.setState(state => ({ items: [...state.items, obj] }))
   }
@@ -28,8 +29,7 @@ class App extends Component {
       <ThemeProvider theme={theme}>
         <div className="hi" data-testid="app">
           <ItemForm onSubmit={this.handleSubmit} />
-          <RecentPurchases />
-          <BudgetItem />
+          <TransactionDisplay items={this.state.items} />
         </div>
       </ThemeProvider>
     )

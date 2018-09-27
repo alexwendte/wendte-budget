@@ -1,42 +1,47 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { elevation } from 'utils/mixins'
 import styled from 'styled-components'
-import * as fakeData from './fakeData'
+import BudgetItem from './BudgetItem'
 
-export default class TransactionDisplay extends Component {
-  state = {
-    transactions: undefined,
+class TransactionDisplay extends Component {
+  static defaultProps = {
+    items: null,
   }
 
-  componentWillMount() {
-    const transactions = fakeData.getTransactions({ number: 10 })
-    this.setState({ transactions })
-  }
   render() {
-    const trans = this.state.transactions
-    return trans ? (
-      <Transactions data-testid="transactions">
-        {trans.map(tran => (
-          <li key={tran.cost + tran.date}>
-            <TransactionGroup>
-              <li>{tran.itemName}</li>
-              <li>{tran.cost}</li>
-              <li>{tran.date}</li>
-              <li>{tran.person}</li>
-            </TransactionGroup>
-          </li>
-        ))}
-      </Transactions>
-    ) : null
+    const { items } = this.props
+    return (
+      <TransactionTable>
+        <h2 className="heading">Recent Purchases</h2>
+        <TableItems>
+          {items.map(item => (
+            <BudgetItem item={item} key={item.name + item.date} />
+          ))}
+        </TableItems>
+      </TransactionTable>
+    )
   }
 }
 
-const Transactions = styled.ul`
-  background: black;
-  &:nth-child(2n) {
-    background: ${props => props.theme.darkGray};
+export default TransactionDisplay
+
+TransactionDisplay.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.object),
+}
+
+const TransactionTable = styled.div`
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 4rem;
+  .heading {
+    color: salmon;
+    padding-bottom: 2rem;
   }
 `
 
-const TransactionGroup = styled.ul`
-  background: orange;
+const TableItems = styled.div`
+  ${elevation({ level: 4 })};
+  border-radius: 5px;
+  overflow: hidden;
 `
