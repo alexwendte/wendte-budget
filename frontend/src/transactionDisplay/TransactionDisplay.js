@@ -13,7 +13,7 @@ class TransactionDisplay extends Component {
     const { items } = this.props
     return (
       <TransactionTable>
-        <h2 className="heading">Recent Purchases</h2>
+        <h2 className="heading">Recent Transactions</h2>
         <TableItems>
           {items.map(item => (
             <BudgetItem item={item} key={item.name + item.date} />
