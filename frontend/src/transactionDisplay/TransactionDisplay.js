@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { elevation } from 'utils/mixins'
 import styled from 'styled-components'
-import BudgetItem from './BudgetItem'
+import TransactionRow from './TransactionRow'
 
 class TransactionDisplay extends Component {
   static defaultProps = {
@@ -16,7 +16,7 @@ class TransactionDisplay extends Component {
         <h2 className="heading">Recent Transactions</h2>
         <TableItems>
           {items.map(item => (
-            <BudgetItem item={item} key={item.name + item.date} />
+            <TransactionRow item={item} key={item.name + item.date} />
           ))}
         </TableItems>
       </TransactionTable>

@@ -15,16 +15,15 @@ const setup = propOverrides => {
   const utils = render(<ItemForm {...props} />)
 
   const fakeForm = {
-    name: 'SSD',
+    title: 'SSD',
     cost: '$23',
     category: 'Groceries',
     date: '2018-09-14',
-    person: 'Alex',
+    notes: 'This made my computer WAY Faster',
   }
-  utils.getByLabelText('Item Name').value = fakeForm.name
+  utils.getByLabelText('Transaction Title').value = fakeForm.title
   utils.getByLabelText('Item Cost').value = fakeForm.cost
   utils.getByLabelText('Item Category').value = fakeForm.category
-  utils.getByLabelText('Purchaser').value = fakeForm.person
 
   const submitButton = utils.getByText('Submit')
   return {
@@ -66,16 +65,18 @@ describe('interaction', () => {
     const { props, submitButton, fakeForm, getByLabelText } = setup()
     const valueAfterStrip = 23
     getByLabelText('Date of Purchase').value = fakeForm.date
+    getByLabelText('Notes').value = fakeForm.notes
 
     fireEvent.click(submitButton)
 
     expect(props.onSubmit).toHaveBeenCalledTimes(1)
     expect(props.onSubmit).toHaveBeenCalledWith({
-      itemName: fakeForm.name,
+      title: fakeForm.title,
       cost: valueAfterStrip,
       category: 'Groceries',
       date: new Date(fakeForm.date).toISOString(),
-      person: fakeForm.person,
+      type: 'Expense',
+      notes: fakeForm.notes,
     })
   })
 

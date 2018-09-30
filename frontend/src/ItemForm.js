@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import CostInput from './CostInput'
 
 const ItemForm = props => {
@@ -9,46 +10,59 @@ const ItemForm = props => {
 
   const handleSubmit = ev => {
     ev.preventDefault()
-    const { itemName, cost: stringCost, category, date, person } = ev.currentTarget.elements
+    const { title, cost: stringCost, category, date, type, notes } = ev.currentTarget.elements
     const cost = convertToNumAndRemoveDSign(stringCost.value)
     const elements = Array.from(ev.currentTarget.elements)
     const shouldContinue = !elements.some(el => el.required && el.value === '')
     if (shouldContinue) {
       props.onSubmit({
-        itemName: itemName.value,
+        title: title.value,
         cost,
         category: category.value,
         date: new Date(date.value).toISOString(),
-        person: person.value,
+        type: type.value,
+        notes: notes.value,
       })
     }
   }
 
   return (
     <div className="item-form">
-      <form onSubmit={handleSubmit}>
-        <h4>Enter your purchase</h4>
-        <label htmlFor="itemName">Item Name</label>
-        <input type="text" id="itemName" placeholder="Ramen Noodles" required />
-        <label htmlFor="cost">Item Cost</label>
-        <CostInput id="cost" placeholder="$3.78" required />
-        <label htmlFor="category">Item Category</label>
-        <input type="text" id="category" placeholder="Groceries" required />
-        <label htmlFor="date">Date of Purchase</label>
-        <input type="date" id="date" defaultValue={nowForInput} required />
-        <label htmlFor="person">Purchaser</label>
-        <input type="text" id="person" placeholder="Brianna" required />
-        <fieldset>
-          <legend>Transaction Type</legend>
-          <label htmlFor="expenseInput">Expense</label>
-          <input type="radio" name="Transaction Type" id="expenseInput" defaultChecked />
-          <label htmlFor="incomeInput">Income</label>
-          <input type="radio" name="Transaction Type" id="incomeInput" />
-        </fieldset>
+      <Form onSubmit={handleSubmit}>
+        <h4 className="heading">Enter your purchase</h4>
+        <DateInputGroup>
+          <label htmlFor="date">Date of Purchase</label>
+          <input type="date" id="date" name="date" defaultValue={nowForInput} required />
+        </DateInputGroup>
+        <TitleInputGroup>
+          <label htmlFor="title">Transaction Title</label>
+          <input type="text" id="title" name="title" placeholder="Ramen Noodles" required />
+        </TitleInputGroup>
+        <CategoryInputGroup>
+          <label htmlFor="category">Item Category</label>
+          <input type="text" id="category" name="category" placeholder="Groceries" required />
+        </CategoryInputGroup>
+        <CostInputGroup>
+          <label htmlFor="cost">Item Cost</label>
+          <CostInput id="cost" name="cost" placeholder="$3.78" required />
+        </CostInputGroup>
+        <TypeInputGroup>
+          <fieldset>
+            <legend>Transaction Type</legend>
+            <label htmlFor="expenseInput">Expense</label>
+            <input type="radio" name="type" value="Expense" id="expenseInput" defaultChecked />
+            <label htmlFor="incomeInput">Income</label>
+            <input type="radio" name="type" value="Income" id="incomeInput" />
+          </fieldset>
+        </TypeInputGroup>
+        <NotesInputGroup>
+          <label htmlFor="notes">Notes</label>
+          <input type="text" id="notes" name="notes" placeholder="Brianna is my love so I bought her something nice" />
+        </NotesInputGroup>
         <button type="submit" onSubmit={handleSubmit}>
           Submit
         </button>
-      </form>
+      </Form>
     </div>
   )
 }
@@ -62,3 +76,40 @@ ItemForm.propTypes = {
 ItemForm.defaultProps = {
   onSubmit: data => {},
 }
+
+const Form = styled.form`
+  background: ${props => props.theme.grey};
+  .heading {
+    color: white;
+  }
+`
+
+const InputGroup = styled.div`
+  display: inline-block;
+  label,
+  legend {
+    color: white;
+  }
+  & > * {
+    display: block;
+  }
+`
+
+const DateInputGroup = styled(InputGroup)`
+  width: 6rem;
+`
+const TitleInputGroup = styled(InputGroup)``
+const CostInputGroup = styled(InputGroup)`
+  width: 8rem;
+  input {
+    width: 8rem;
+  }
+`
+const CategoryInputGroup = styled(InputGroup)``
+const TypeInputGroup = styled(InputGroup)``
+const NotesInputGroup = styled(InputGroup)`
+  width: 100%;
+  input {
+    width: 100%;
+  }
+`

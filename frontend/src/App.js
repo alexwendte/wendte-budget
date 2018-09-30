@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { ThemeProvider } from 'styled-components'
+import axios from 'axios'
 import './styles/App.css'
 import ItemForm from './ItemForm'
 import TransactionDisplay from './transactionDisplay/TransactionDisplay'
@@ -22,6 +23,8 @@ class App extends Component {
 
   handleSubmit = obj => {
     this.setState(state => ({ items: [...state.items, obj] }))
+    console.log(obj)
+    axios.post('/api/addTransaction', obj)
   }
 
   render() {

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-class BudgetItem extends React.Component {
+class TransactionRow extends React.Component {
   state = {
     expandNotes: false,
   }
@@ -30,9 +30,9 @@ class BudgetItem extends React.Component {
   }
 }
 
-export default BudgetItem
+export default TransactionRow
 
-BudgetItem.propTypes = {
+TransactionRow.propTypes = {
   item: PropTypes.object.isRequired,
 }
 
