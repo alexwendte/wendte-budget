@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
-import { ThemeProvider } from 'styled-components'
+import styled, { ThemeProvider, css } from 'styled-components'
 import axios from 'axios'
+import { transactions as fakeTransactions } from 'utils/fakeData'
 import './styles/App.css'
 import ItemForm from './ItemForm'
 import TransactionDisplay from './transactionDisplay/TransactionDisplay'
-import { transactions as fakeTransactions } from 'utils/fakeData'
 
 const theme = {
-  red: '#FF0000',
+  primary: '#66B9Bf',
   black: '#222222',
   grey: '#3A3A3A',
-  lightGrey: '#E1E1E1',
-  offWhite: '#EDEDED',
+  green: '#0ac775',
+  lightGrey: '#f3f3f3',
   maxWidth: '1000px',
-  bs: '0 12px 24px 0 rgba(0, 0, 0, 0.09)',
+  white: '#fff',
 }
 
 class App extends Component {
@@ -30,13 +30,19 @@ class App extends Component {
   render() {
     return (
       <ThemeProvider theme={theme}>
-        <div className="hi" data-testid="app">
+        <AppWrapper className="hi" data-testid="app">
           <ItemForm onSubmit={this.handleSubmit} />
           <TransactionDisplay items={this.state.items} />
-        </div>
+        </AppWrapper>
       </ThemeProvider>
     )
   }
 }
 
 export default App
+
+const AppWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`

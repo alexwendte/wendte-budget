@@ -8,10 +8,10 @@ const transactionSchema = new mongoose.Schema({
     trim: true,
     required: 'Please enter an item name',
   },
-  cost: {
+  amount: {
     type: String,
     trim: true,
-    required: 'Please enter an item cost',
+    required: 'Please enter an item amount',
   },
   category: {
     type: String,

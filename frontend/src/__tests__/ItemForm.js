@@ -16,13 +16,13 @@ const setup = propOverrides => {
 
   const fakeForm = {
     title: 'SSD',
-    cost: '$23',
+    amount: '$23',
     category: 'Groceries',
     date: '2018-09-14',
     notes: 'This made my computer WAY Faster',
   }
   utils.getByLabelText('Transaction Title').value = fakeForm.title
-  utils.getByLabelText('Item Cost').value = fakeForm.cost
+  utils.getByLabelText('Amount').value = fakeForm.amount
   utils.getByLabelText('Item Category').value = fakeForm.category
 
   const submitButton = utils.getByText('Submit')
@@ -37,7 +37,7 @@ const setup = propOverrides => {
 describe('rendering', () => {
   it("starts with today's date", () => {
     const { getByLabelText } = setup()
-    const dateInput = getByLabelText('Date of Purchase')
+    const dateInput = getByLabelText('Date')
     const now = new Date(Date.now())
     const resDate = now.toISOString().slice(0, 10)
 
@@ -54,7 +54,7 @@ describe('rendering', () => {
 describe('interaction', () => {
   it('should not allow a form with any blank required fields to be submitted', () => {
     const { getByLabelText, props, submitButton } = setup()
-    getByLabelText('Item Cost').value = ''
+    getByLabelText('Amount').value = ''
 
     fireEvent.click(submitButton)
 
@@ -64,7 +64,7 @@ describe('interaction', () => {
   it('submits form with correct values', () => {
     const { props, submitButton, fakeForm, getByLabelText } = setup()
     const valueAfterStrip = 23
-    getByLabelText('Date of Purchase').value = fakeForm.date
+    getByLabelText('Date').value = fakeForm.date
     getByLabelText('Notes').value = fakeForm.notes
 
     fireEvent.click(submitButton)
@@ -72,7 +72,7 @@ describe('interaction', () => {
     expect(props.onSubmit).toHaveBeenCalledTimes(1)
     expect(props.onSubmit).toHaveBeenCalledWith({
       title: fakeForm.title,
-      cost: valueAfterStrip,
+      amount: valueAfterStrip,
       category: 'Groceries',
       date: new Date(fakeForm.date).toISOString(),
       type: 'Expense',

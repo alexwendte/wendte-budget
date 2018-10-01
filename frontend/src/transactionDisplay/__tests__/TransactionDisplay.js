@@ -25,7 +25,7 @@ describe('rendering', () => {
   it('renders all of the items', () => {
     const { getByText, props } = setup()
     props.items.forEach(item => {
-      expect(getByText(item.name)).toBeTruthy()
+      expect(getByText(item.title)).toBeTruthy()
     })
   })
 })
