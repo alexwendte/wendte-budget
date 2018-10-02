@@ -16,7 +16,7 @@ class TransactionRow extends React.Component {
     const { title, category, date, notes, type, amount } = this.props.item
     return (
       <Item data-testid="budget-item" tabIndex="0" role="button" onClick={this.handleClick}>
-        <Value>{title}</Value>
+        <Title>{title}</Title>
         <Dates>{new Date(date).toDateString()}</Dates>
         <Category>{category}</Category>
         {this.state.expandNotes && notes ? <Notes>{notes}</Notes> : null}
@@ -53,13 +53,13 @@ const Item = styled.div`
 
   ${media.tabletPort`
     grid-gap: 0;
-    grid-template-columns: minmax(125px, 1fr) minmax(125px, 1fr) 10px;
+    grid-template-columns: minmax(125px, 1fr) minmax(125px, 1fr) 1.6rem;
     grid-template-rows: repeat(3, auto);
     padding: 1rem;
     font-size: 1.4rem;
   `};
 `
-const Value = styled.div``
+const Title = styled.div``
 const Dates = styled.div`
   
   ${media.tabletPort`

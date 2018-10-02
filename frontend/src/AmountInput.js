@@ -18,7 +18,7 @@ export default class AmountInput extends Component {
 
   isInputValid = value => {
     if (!isNumber(value)) return true
-    const [before, after] = value.split('.')
+    const after = value.split('.')[1]
     if (after && after.length > 2) return true
   }
 

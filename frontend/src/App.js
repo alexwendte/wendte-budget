@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import styled, { ThemeProvider, css } from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 import axios from 'axios'
 import { transactions as fakeTransactions } from 'utils/fakeData'
 import './styles/App.css'

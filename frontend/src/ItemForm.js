@@ -128,6 +128,8 @@ const InputGroup = styled.div`
 const DateInputGroup = styled(InputGroup)`
   input {
     padding-right: 0.3rem;
+    vertical-align: middle;
+    line-height: 3.4rem;
   }
 `
 const TitleInputGroup = styled(InputGroup)``
@@ -150,6 +152,7 @@ const TypeInputGroup = styled(InputGroup)`
   input {
     margin-top: 0;
     vertical-align: middle;
+    background: ${props => props.theme.black};
   }
 `
 const NotesInputGroup = styled(InputGroup)`
