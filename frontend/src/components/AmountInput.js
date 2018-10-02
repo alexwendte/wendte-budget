@@ -9,16 +9,24 @@ export default class AmountInput extends Component {
     id: 'amount',
     'aria-label': 'amount',
     placeholder: '$3.78',
+    value: undefined,
+    className: null,
+    inTable: false,
   }
 
   state = {
-    inputValue: '',
+    inputValue: this.props.value,
     invalid: false,
   }
 
   isInputValid = value => {
-    if (!isNumber(value)) return true
-    const after = value.split('.')[1]
+    // Add in inTable support
+    let newValue = value
+    if(this.props.inTable) {
+      newValue = newValue.includes('-') ? newValue.slice(1) : newValue
+    }
+    if (!isNumber(newValue)) return true
+    const after = newValue.split('.')[1]
     if (after && after.length > 2) return true
   }
 
@@ -38,12 +46,13 @@ export default class AmountInput extends Component {
   }
 
   render() {
+    const { className, ...rest } = this.props
     return (
       <Input
-        {...this.props}
+        {...rest}
         value={this.state.inputValue}
         onChange={this.handleChange}
-        className={this.state.invalid ? 'invalid' : ''}
+        className={`${className} ${this.state.invalid ? 'invalid' : ''}`}
         onBlur={this.handleBlur}
       />
     )
@@ -54,6 +63,9 @@ AmountInput.propTypes = {
   id: PropTypes.string,
   'aria-label': PropTypes.string,
   placeholder: PropTypes.string,
+  value: PropTypes.string,
+  className: PropTypes.string,
+  inTable: PropTypes.bool,
 }
 
 const Input = styled.input`
@@ -74,7 +86,6 @@ const Input = styled.input`
       transform: translateX(0);
     }
   }
-  transform: rotateX(0);
   ${transition({ name: 'easeInCubic', prop: 'transform' })};
   &.invalid {
     border: 1px solid red;

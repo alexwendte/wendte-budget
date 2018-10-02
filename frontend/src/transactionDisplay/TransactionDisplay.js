@@ -15,6 +15,7 @@ class TransactionDisplay extends Component {
     return (
       <TransactionTable>
         <h2 className="heading">Recent Transactions</h2>
+        <Edit className="edit">Edit Transactions</Edit>
         <TableItems>
           <TableHeader>
             <div>Title</div>
@@ -40,6 +41,8 @@ TransactionDisplay.propTypes = {
 const TransactionTable = styled.div`
   padding: 4rem;
   width: 90%;
+  display: flex;
+  flex-direction: column;
   .heading {
     color: ${props => props.theme.grey};
     text-align: center;
@@ -78,6 +81,18 @@ const TableHeader = styled.div`
       justify-self: right;
     }
   `};
+`
+
+const Edit = styled.button`
+  background: none;
+  border: none;
+  color: ${props => props.theme.grey};
+  font-weight: 600;
+  padding: 0.5rem;
+  align-self: flex-end;
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 const TableItems = styled.div`

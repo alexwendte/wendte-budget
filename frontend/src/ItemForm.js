@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { media } from 'utils/mixins'
-import AmountInput from './AmountInput'
+import AmountInput from './components/AmountInput'
 
 const ItemForm = props => {
   const now = new Date(Date.now())

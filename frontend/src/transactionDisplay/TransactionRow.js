@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { media } from 'utils/mixins'
+import Input from 'components/Input'
+import AmountInput from 'components/AmountInput'
 
 class TransactionRow extends React.Component {
   state = {
@@ -15,18 +17,14 @@ class TransactionRow extends React.Component {
   render() {
     const { title, category, date, notes, type, amount } = this.props.item
     return (
-      <Item data-testid="budget-item" tabIndex="0" role="button" onClick={this.handleClick}>
-        <Title>{title}</Title>
-        <Dates>{new Date(date).toDateString()}</Dates>
-        <Category>{category}</Category>
-        {this.state.expandNotes && notes ? <Notes>{notes}</Notes> : null}
-        {type === 'expense' ? (
-          <Amount className="expense">{`-$${amount}.00`}</Amount>
-        ) : (
-          <Amount className="income">{`$${amount}.00`}</Amount>
-        )}
+      <Row data-testid="budget-item" tabIndex="0" role="button" onClick={this.handleClick}>
+        <Title type="text" aria-label="table-title" value={title} />
+        <Dates type="text" aria-label="table-date" value={new Date(date).toDateString()} />
+        <Category type="text" aria-label="table-category" value={category} />
+        {this.state.expandNotes && notes ? <Notes type="text" value={notes} aria-label="table-notes" /> : null}
+        {<Amount className={`${type} table`} type="text" aria-label="table-amount" value={type === 'expense' ?`-$${amount}.00` : `$${amount}.00`} inTable onClick={ev => ev.stopPropagation()}/>}
         {notes ? <ExpandButton data-testid="expand-button">&#9660;</ExpandButton> : null}
-      </Item>
+      </Row>
     )
   }
 }
@@ -37,7 +35,7 @@ TransactionRow.propTypes = {
   item: PropTypes.object.isRequired,
 }
 
-const Item = styled.div`
+const Row = styled.div`
   grid-gap: 1.5rem;
   padding: 1.5rem;
   color: white;
@@ -52,15 +50,24 @@ const Item = styled.div`
   }
 
   ${media.tabletPort`
-    grid-gap: 0;
-    grid-template-columns: minmax(125px, 1fr) minmax(125px, 1fr) 1.6rem;
-    grid-template-rows: repeat(3, auto);
-    padding: 1rem;
-    font-size: 1.4rem;
+  grid-gap: 0;
+  grid-template-columns: minmax(12.5rem, 1fr) 1fr minmax(9rem, 1fr) 1.6rem;
+  grid-template-rows: repeat(3, auto);
+  padding: 1rem;
+  font-size: 1.4rem;
+  `};
+  ${media.phone`
+    grid-template-columns: minmax(12.5rem, 2fr) 1fr minmax(9rem, 2fr) 1.6rem;
   `};
 `
-const Title = styled.div``
-const Dates = styled.div`
+const TableInput = styled(Input)`
+  background: none;
+  border: none;
+  color: white;
+  width: 100%;
+`
+const Title = styled(TableInput)``
+const Dates = styled(TableInput)`
   
   ${media.tabletPort`
     grid-column: 1;
@@ -68,7 +75,7 @@ const Dates = styled.div`
   `}
   color: ${props => props.theme.lightGrey};
 `
-const Category = styled.div`
+const Category = styled(TableInput)`
   
   ${media.tabletPort`
     grid-column: 1;
@@ -76,20 +83,29 @@ const Category = styled.div`
   `}
   color: ${props => props.theme.lightGrey};
 `
-const Amount = styled.div`
+const Amount = styled(AmountInput)`
   font-weight: 300;
+  text-align: right;
+  width: 100%;
+  &.table {
+    background: none;
+    color: white;
+    border: none;
+    animation: none;
+    border: none;
+  }
   &.income {
     color: ${props => props.theme.green};
   }
 
   ${media.tabletPort`
     grid-row: 2
-    grid-column: 2;
+    grid-column: 3;
     justify-self: right;
     padding-right: 1rem;
   `};
 `
-const Notes = styled.div`
+const Notes = styled(TableInput)`
   background: ${props => props.theme.lightGrey};
   color: ${props => props.theme.black};
   padding: 1rem 2rem;
@@ -97,6 +113,7 @@ const Notes = styled.div`
   grid-row: 2;
   margin: 1rem -1.5rem -1.5rem;
   font-size: 1.4rem;
+  width: unset;
   ${media.tabletLand`
     grid-row: unset;
   `};
@@ -110,7 +127,7 @@ const ExpandButton = styled.button`
   padding: 0;
 
   ${media.tabletPort`
-    grid-row: 2;
-    grid-column: 3;
+  grid-row: 2;
+  grid-column: 4;
   `};
 `

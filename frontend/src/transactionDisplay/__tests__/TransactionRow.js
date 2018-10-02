@@ -26,14 +26,14 @@ const setup = ({ item } = {}) => {
 
 describe('rendering', () => {
   it('contains the item attributes', () => {
-    const { getByText, props } = setup()
-    const { title, amount, category, date, person } = props.item
+    const { getByLabelText, props } = setup()
+    const { title, amount, category, date } = props.item
     const formattedAmount = `$${amount}.00`
     const formattedDate = new Date(date).toDateString()
-    expect(getByText(title)).toBeTruthy()
-    expect(getByText(formattedAmount)).toBeTruthy()
-    expect(getByText(category)).toBeTruthy()
-    expect(getByText(formattedDate)).toBeTruthy()
+    expect(getByLabelText('table-title').value).toBe(title)
+    expect(getByLabelText('table-date').value).toBe(formattedDate)
+    expect(getByLabelText('table-category').value).toBe(category)
+    expect(getByLabelText('table-amount').value).toBe(formattedAmount)
   })
 
   it('should not render the notes initially', () => {
@@ -47,17 +47,13 @@ describe('rendering', () => {
     expect(getByTestId('expand-button')).toBeTruthy()
   })
   it('should render amount with a .income class if it is an income', () => {
-    const { getByText, props } = setup({ item: { type: 'income' } })
-    const { amount } = props.item
-    const formattedAmount = `$${amount}.00`
-    const amountEl = getByText(formattedAmount)
+    const { getByLabelText } = setup({ item: { type: 'income' } })
+    const amountEl = getByLabelText('table-amount')
     expect(amountEl.classList).toContain('income')
   })
   it('should render amount with a .income class if it is an income', () => {
-    const { getByText, props } = setup({ item: { type: 'expense' } })
-    const { amount } = props.item
-    const formattedAmount = `-$${amount}.00`
-    const amountEl = getByText(formattedAmount)
+    const { getByLabelText } = setup({ item: { type: 'expense' } })
+    const amountEl = getByLabelText('table-amount')
     expect(amountEl.classList).toContain('expense')
   })
   it('should not render unnecessary data', () => {
@@ -69,10 +65,15 @@ describe('rendering', () => {
 describe('interaction', () => {
   it('should show notes if item is clicked anywhere', () => {
     const notes = 'Truly a good purchase'
-    const { getByText, getByTestId } = setup({ item: { notes } })
+    const { getByLabelText, getByTestId } = setup({ item: { notes } })
     const item = getByTestId('budget-item')
     fireEvent.click(item)
-    expect(getByText(describe)).toBeTruthy()
+    expect(getByLabelText('table-notes')).toBeTruthy()
+  })
+  it('should only allow inputs to be focusable if they are editable', () => {
+    // Test if a fire event on an input changes something
+    // Set the read only prop to change this
+    // I need to test the -sign input stuff.
   })
 })
 
