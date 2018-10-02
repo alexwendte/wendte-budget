@@ -20,7 +20,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test:coverage": "react-scripts test --env=jsdom --coverage"
   },
   "devDependencies": {
     "eslint-config-airbnb": "^16",
@@ -34,6 +35,11 @@
     "coverageReporters": [
       "json",
       "html"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/registerServiceWorker.js",
+      "!src/index.js"
     ]
   }
 }

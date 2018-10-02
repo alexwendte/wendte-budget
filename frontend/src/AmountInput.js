@@ -16,10 +16,15 @@ export default class AmountInput extends Component {
     invalid: false,
   }
 
+  isInputValid = value => {
+    if (!isNumber(value)) return true
+    const [before, after] = value.split('.')
+    if (after && after.length > 2) return true
+  }
+
   handleChange = ev => {
-    const { value } = ev.target
-    const strippedValue = hasDSign(value) ? value.slice(1) : value
-    if (!isNumber(strippedValue)) {
+    const { value } = ev.currentTarget
+    if (this.isInputValid(value)) {
       this.setState({ invalid: false }, () => {
         this.setState({ invalid: true })
       })
@@ -29,21 +34,7 @@ export default class AmountInput extends Component {
     this.setState({ inputValue: stringToReturn.inputValue, invalid: false })
   }
   handleBlur = () => {
-    this.setState(state => {
-      const { inputValue } = state
-      const returnState = {}
-      if (inputValue === '$') {
-        returnState.inputValue = ''
-      }
-      if (inputValue.length > 0) {
-        returnState.invalid = false
-      }
-      console.log(returnState)
-      return { ...returnState }
-    })
-    /* if (validateInput(this.state.inputValue)) {
-      this.setState({ invalid: false })
-    } */
+    this.setState(state => (state.inputValue === '$' ? { inputValue: '', invalid: true } : { invalid: false }))
   }
 
   render() {

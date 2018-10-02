@@ -25,11 +25,30 @@ describe('render', () => {
 })
 
 describe('interaction', () => {
-  it('does not allow user to enter letters', () => {
+  it('should allow valid input', () => {
+    const { getByLabelText } = setup()
+    const amountInput = getByLabelText('amount')
+    fireEvent.change(amountInput, { target: { value: '1' } })
+    expect(amountInput.value).toEqual('$1')
+    amountInput.value = '$1'
+    fireEvent.change(amountInput, { target: { value: '$1.' } })
+    expect(amountInput.value).toBe('$1.')
+    fireEvent.change(amountInput, { target: { value: '$1.0' } })
+    expect(amountInput.value).toBe('$1.0')
+    fireEvent.change(amountInput, { target: { value: '$0.5' } })
+    expect(amountInput.value).toBe('$0.5')
+    fireEvent.change(amountInput, { target: { value: '$0.' } })
+    expect(amountInput.value).toBe('$0.')
+  })
+  it('does not allow user to enter invalid input', () => {
     const { getByLabelText } = setup()
     const amountInput = getByLabelText('amount')
     expect(amountInput.value).toEqual('')
     fireEvent.change(amountInput, { target: { value: 'f' } })
+    expect(amountInput.value).toBe('')
+    fireEvent.change(amountInput, { target: { value: '3.00.0' } })
+    expect(amountInput.value).toBe('')
+    fireEvent.change(amountInput, { target: { value: '3.001' } })
     expect(amountInput.value).toBe('')
   })
   it('keeps a $ in front of user input', async() => {
@@ -41,7 +60,6 @@ describe('interaction', () => {
   it('should have a class of invalid if wrong input is entered', () => {
     const { getByLabelText } = setup()
     const amountInput = getByLabelText('amount')
-    expect(amountInput.value).toEqual('')
     fireEvent.change(amountInput, { target: { value: 'f' } })
     expect(amountInput.classList).toContain('invalid')
   })

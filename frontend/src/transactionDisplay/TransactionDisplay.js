@@ -39,7 +39,7 @@ TransactionDisplay.propTypes = {
 
 const TransactionTable = styled.div`
   padding: 4rem;
-  max-width: 100%;
+  width: 90%;
   .heading {
     color: ${props => props.theme.grey};
     text-align: center;

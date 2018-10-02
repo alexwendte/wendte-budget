@@ -54,19 +54,17 @@ const Item = styled.div`
   ${media.tabletPort`
     grid-gap: 0;
     grid-template-columns: minmax(125px, 1fr) minmax(125px, 1fr) 10px;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: repeat(3, auto);
     padding: 1rem;
     font-size: 1.4rem;
   `};
 `
-// Put the date under the title.type
-// Look at the Chase app for inspiration
 const Value = styled.div``
 const Dates = styled.div`
   
   ${media.tabletPort`
     grid-column: 1;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   `}
   color: ${props => props.theme.lightGrey};
 `
@@ -74,7 +72,7 @@ const Category = styled.div`
   
   ${media.tabletPort`
     grid-column: 1;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   `}
   color: ${props => props.theme.lightGrey};
 `
@@ -85,9 +83,10 @@ const Amount = styled.div`
   }
 
   ${media.tabletPort`
-    grid-row: 1 / -1;
+    grid-row: 2
     grid-column: 2;
     justify-self: right;
+    padding-right: 1rem;
   `};
 `
 const Notes = styled.div`
@@ -97,6 +96,10 @@ const Notes = styled.div`
   grid-column: 1 / -1;
   grid-row: 2;
   margin: 1rem -1.5rem -1.5rem;
+  font-size: 1.4rem;
+  ${media.tabletLand`
+    grid-row: unset;
+  `};
 `
 
 const ExpandButton = styled.button`
