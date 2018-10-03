@@ -2,19 +2,12 @@
   "name": "wendte-budget",
   "version": "0.1.0",
   "private": false,
-  "proxy": {
-    "/api": {
-      "target": "http://localhost:3333/",
-      "secure": false
-    }
-  },
+  "proxy": "http://localhost:3333/",
   "dependencies": {
     "axios": "^0.18.0",
     "prop-types": "^15.6.2",
-    "react": "^16.5.0",
-    "react-dom": "^16.5.0",
-    "react-scripts": "1.1.5",
-    "styled-components": "^3.4.5"
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -28,8 +21,9 @@
     "eslint-plugin-flowtype": "^2.50.0",
     "eslint-plugin-graphql": "^2.1.1",
     "eslint-plugin-jest": "^21.22.0",
-    "jest": "^23.6.0",
-    "react-testing-library": "^5.0.1"
+    "react-scripts": "^2.0.3",
+    "react-testing-library": "^5.1.0",
+    "styled-components": "^3.4.9"
   },
   "jest": {
     "coverageReporters": [
@@ -44,5 +38,11 @@
       "!src/utils/mixins.js",
       "!src/utils/fakeData.js"
     ]
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

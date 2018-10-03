@@ -27,6 +27,8 @@ class App extends Component {
     axios.post('/api/addTransaction', obj)
   }
 
+  // I can just pass user to ItemForm, no need for context!
+
   render() {
     return (
       <ThemeProvider theme={theme}>
