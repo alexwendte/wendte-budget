@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, cleanup } from 'react-testing-library'
+import { render, cleanup, fireEvent } from 'react-testing-library'
 import { transactions as fakeTransactions } from 'utils/fakeData'
 import TransactionDisplay from '../TransactionDisplay'
 
@@ -27,6 +27,15 @@ describe('rendering', () => {
   })
 })
 
-describe('interaction', () => {})
+describe('interaction', () => {
+  it('should toggle readOnly when Edit Transactions is clicked', () => {
+    const { getByText, getByLabelText } = setup()
+    const firstInput = getByLabelText('table-title')
+    fireEvent.click(getByText('Edit Transactions'))
+    expect(firstInput.readOnly).toBeFalsy()
+    fireEvent.click(getByText('Edit Transactions'))
+    expect(firstInput.readOnly).toBeTruthy()
+  })
+})
 
 describe('lifecycle', () => {})

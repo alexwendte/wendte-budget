@@ -9,9 +9,9 @@ import TransactionDisplay from './transactionDisplay/TransactionDisplay'
 const theme = {
   primary: '#66B9Bf',
   black: '#222222',
-  grey: '#3A3A3A',
+  grey: '#354041',
   green: '#0ac775',
-  lightGrey: '#f3f3f3',
+  lightGrey: '#f1f3f4',
   maxWidth: '1000px',
   white: '#fff',
 }

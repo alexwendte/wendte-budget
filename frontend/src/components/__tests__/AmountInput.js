@@ -1,12 +1,11 @@
 import React from 'react'
 import { render, cleanup, fireEvent } from 'react-testing-library'
-import AmountInput from '../AmountInput'
+import AmountInput from 'components/AmountInput'
 
 afterEach(cleanup)
 
 const setup = propOverrides => {
   const props = Object.assign({}, propOverrides)
-
   const utils = render(<AmountInput {...props} />)
 
   return {
@@ -30,7 +29,6 @@ describe('interaction', () => {
     const amountInput = getByLabelText('amount')
     fireEvent.change(amountInput, { target: { value: '1' } })
     expect(amountInput.value).toEqual('$1')
-    amountInput.value = '$1'
     fireEvent.change(amountInput, { target: { value: '$1.' } })
     expect(amountInput.value).toBe('$1.')
     fireEvent.change(amountInput, { target: { value: '$1.0' } })
@@ -40,6 +38,21 @@ describe('interaction', () => {
     fireEvent.change(amountInput, { target: { value: '$0.' } })
     expect(amountInput.value).toBe('$0.')
   })
+  it('should allow valid input when inTable', () => {
+    const { getByLabelText } = setup({ inTable: true })
+    const amountInput = getByLabelText('amount')
+    fireEvent.change(amountInput, { target: { value: '-$3.00' } })
+    expect(amountInput.value).toBe('-$3.00')
+    fireEvent.change(amountInput, { target: { value: '-' } })
+    expect(amountInput.value).toBe('-')
+  })
+  it('should not allow invalid input when inTable', () => {
+    const { getByLabelText } = setup({ inTable: true })
+    const amountInput = getByLabelText('amount')
+    expect(amountInput.value).toBe('')
+    fireEvent.change(amountInput, { target: { value: '-$3.00-' } })
+    expect(amountInput.value).toBe('')
+  })
   it('does not allow user to enter invalid input', () => {
     const { getByLabelText } = setup()
     const amountInput = getByLabelText('amount')
@@ -48,7 +61,11 @@ describe('interaction', () => {
     expect(amountInput.value).toBe('')
     fireEvent.change(amountInput, { target: { value: '3.00.0' } })
     expect(amountInput.value).toBe('')
-    fireEvent.change(amountInput, { target: { value: '3.001' } })
+    fireEvent.change(amountInput, { target: { value: '-3.00' } })
+    expect(amountInput.value).toBe('')
+    fireEvent.change(amountInput, { target: { value: '-3.00' } })
+    expect(amountInput.value).toBe('')
+    fireEvent.change(amountInput, { target: { value: '$3.00$' } })
     expect(amountInput.value).toBe('')
   })
   it('keeps a $ in front of user input', async() => {
@@ -73,10 +90,19 @@ describe('interaction', () => {
   it('should lose the invalid class on blur and the content is valid', () => {
     const { getByLabelText } = setup()
     const amountInput = getByLabelText('amount')
-    amountInput.value = '$3.00'
     fireEvent.change(amountInput, { target: { value: 'f' } })
     expect(amountInput.classList).toContain('invalid')
     fireEvent.blur(amountInput)
     expect(amountInput.classList).not.toContain('invalid')
+  })
+  it('should format the number to have 2 decimal places on blur', () => {
+    const { getByLabelText } = setup()
+    const amountInput = getByLabelText('amount')
+    fireEvent.change(amountInput, { target: { value: '$3.000000' } })
+    fireEvent.blur(amountInput)
+    expect(amountInput.value).toBe('$3.00')
+    fireEvent.change(amountInput, { target: { value: '$3' } })
+    fireEvent.blur(amountInput)
+    expect(amountInput.value).toBe('$3.00')
   })
 })

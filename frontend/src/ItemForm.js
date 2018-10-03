@@ -82,7 +82,7 @@ const ItemFormWrapper = styled.div`
   margin: 2rem;
   border-radius: 5px;
   .heading {
-    color: ${props => props.theme.grey};
+    color: ${props => props.theme.primary};
     width: 100%;
     text-align: center;
     padding: 1rem;
@@ -92,6 +92,9 @@ const ItemFormWrapper = styled.div`
   ${media.tabletPort`
     margin: 0;
     border-radius: 0;
+    .heading {
+      margin-bottom: 1rem;
+    }
 `};
 `
 
@@ -168,7 +171,7 @@ const NotesInputGroup = styled(InputGroup)`
 const SubmitButton = styled.button`
   border-radius: 5px;
   color: ${props => props.theme.white};
-  background: ${props => props.theme.grey};
+  background: ${props => props.theme.primary};
   border: none;
   padding: 1rem 1.5rem;
   font-weight: 600;

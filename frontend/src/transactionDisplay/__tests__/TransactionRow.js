@@ -4,7 +4,7 @@ import TransactionRow from '../TransactionRow'
 
 afterEach(cleanup)
 
-const setup = ({ item } = {}) => {
+const setup = (propOverrides, { item } = {}) => {
   const props = {
     item: {
       title: 'Level Up Tuts',
@@ -14,6 +14,7 @@ const setup = ({ item } = {}) => {
       type: 'income',
       ...item,
     },
+    ...propOverrides,
   }
 
   const utils = render(<TransactionRow {...props} />)
@@ -60,6 +61,11 @@ describe('rendering', () => {
     const { queryByText } = setup({ item: { type: 'expense' } })
     expect(queryByText('expense')).not.toBeTruthy()
   })
+  test('inputs should start as readOnly', () => {
+    const { getByLabelText } = setup()
+    const title = getByLabelText('table-title')
+    expect(title.readOnly).toBeTruthy()
+  })
 })
 
 describe('interaction', () => {
@@ -70,10 +76,10 @@ describe('interaction', () => {
     fireEvent.click(item)
     expect(getByLabelText('table-notes')).toBeTruthy()
   })
-  it('should only allow inputs to be focusable if they are editable', () => {
-    // Test if a fire event on an input changes something
-    // Set the read only prop to change this
-    // I need to test the -sign input stuff.
+  test('inputs should not be read only after Edit Transactions is clicked', () => {
+    const { getByLabelText } = setup({ readOnly: false })
+    const title = getByLabelText('table-title')
+    expect(title.readOnly).toBeFalsy()
   })
 })
 

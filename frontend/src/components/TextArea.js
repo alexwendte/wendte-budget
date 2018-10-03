@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-export default class Input extends Component {
+export default class TextArea extends Component {
   static defaultProps = {
     value: undefined,
     readOnly: false,
@@ -16,20 +16,18 @@ export default class Input extends Component {
   }
 
   render() {
-    const { readOnly, ...rest } = this.props
     return (
-      <input
-        {...rest}
+      <textarea
+        {...this.props}
         onChange={this.handleChange}
         value={this.state.value}
-        onClick={ev => !readOnly && ev.stopPropagation()}
-        readOnly={readOnly}
+        onClick={ev => ev.stopPropagation()}
       />
     )
   }
 }
 
-Input.propTypes = {
+TextArea.propTypes = {
   value: PropTypes.string,
   readOnly: PropTypes.bool,
 }

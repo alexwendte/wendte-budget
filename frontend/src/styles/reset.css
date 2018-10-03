@@ -157,6 +157,7 @@ h3 {
 }
 
 body,
-input {
-  color: black;
+input,
+textarea {
+  color: #222222;
 }

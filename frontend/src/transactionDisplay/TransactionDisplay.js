@@ -10,12 +10,26 @@ class TransactionDisplay extends Component {
     items: null,
   }
 
+  state = {
+    readOnly: true,
+  }
+  editTransaction = () => {
+    this.setState(({ readOnly }) => ({ readOnly: !readOnly }))
+  }
   render() {
     const { items } = this.props
+    const { readOnly } = this.state
+    // I imaagine the save changes will be a button with type submit.
+    // Doesn't that mean that the whole table is a form?
+    // How will I decide what data was changed? I only want to update the transaciton that was changes.
+    // Each transaction should have an id. When it is changed, I will include that id in the list of id's that were changed.
     return (
       <TransactionTable>
         <h2 className="heading">Recent Transactions</h2>
-        <Edit className="edit">Edit Transactions</Edit>
+        <Controls>
+          <Edit onClick={this.editTransaction}>Edit Transactions</Edit>
+          <Save onClick={this.saveChanges}>Save Changes</Save>
+        </Controls>
         <TableItems>
           <TableHeader>
             <div>Title</div>
@@ -24,7 +38,7 @@ class TransactionDisplay extends Component {
             <div className="amount">Amount</div>
           </TableHeader>
           {items.map(item => (
-            <TransactionRow item={item} key={item.name + item.date} />
+            <TransactionRow item={item} key={item.name + item.date} readOnly={readOnly} />
           ))}
         </TableItems>
       </TransactionTable>
@@ -44,7 +58,7 @@ const TransactionTable = styled.div`
   display: flex;
   flex-direction: column;
   .heading {
-    color: ${props => props.theme.grey};
+    color: ${props => props.theme.primary};
     text-align: center;
     padding: 4rem 0 2rem;
   }
@@ -69,6 +83,9 @@ const TableHeader = styled.div`
     display: inline-block;
     font-size: 2rem;
   }
+  .amount {
+    justify-self: right;
+  }
   ${media.tabletPort`
     grid-template-columns: 1fr 1fr 10px;
     grid-gap: 0;
@@ -78,9 +95,13 @@ const TableHeader = styled.div`
       display: none;
     }
     .amount {
-      justify-self: right;
+      padding-right: 1.5rem;
     }
   `};
+`
+
+const Controls = styled.div`
+  align-self: flex-end;
 `
 
 const Edit = styled.button`
@@ -89,10 +110,14 @@ const Edit = styled.button`
   color: ${props => props.theme.grey};
   font-weight: 600;
   padding: 0.5rem;
-  align-self: flex-end;
+  font-size: 1.4rem;
   &:hover {
     cursor: pointer;
   }
+`
+
+const Save = styled(Edit)`
+  color: ${props => props.theme.primary};
 `
 
 const TableItems = styled.div`

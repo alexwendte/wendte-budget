@@ -39,7 +39,10 @@
     "collectCoverageFrom": [
       "src/**/*.js",
       "!src/registerServiceWorker.js",
-      "!src/index.js"
+      "!src/index.js",
+      "!src/utils/colors.js",
+      "!src/utils/mixins.js",
+      "!src/utils/fakeData.js"
     ]
   }
 }

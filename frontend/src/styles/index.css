@@ -3,7 +3,8 @@ body {
   padding: 0;
   font-family: Rubik, arial, sans-serif;
 }
-input {
+input,
+textarea {
   font-family: Rubik, arial;
 }
 
