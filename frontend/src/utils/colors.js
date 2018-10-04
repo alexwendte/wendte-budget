@@ -6,5 +6,5 @@ export const colors = {
   darkGray: '#393f4d',
   seaGreen: '#66B9Bf',
   electricBlue: '#33ccff',
-};
-export default colors;
+}
+export default colors

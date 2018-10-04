@@ -1,12 +1,22 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import * as React from 'react'
 
-export default class TextArea extends Component {
+type Props = {
+  value?: string,
+  readOnly?: boolean,
+}
+
+type State = {
+  value: string,
+}
+
+export default class TextArea extends React.Component<Props, State> {
   static defaultProps = {
     value: undefined,
     readOnly: false,
   }
+
   state = {
+    // eslint-disable-next-line
     value: this.props.value || '',
   }
 
@@ -16,18 +26,7 @@ export default class TextArea extends Component {
   }
 
   render() {
-    return (
-      <textarea
-        {...this.props}
-        onChange={this.handleChange}
-        value={this.state.value}
-        onClick={ev => ev.stopPropagation()}
-      />
-    )
+    const { value } = this.state
+    return <textarea {...this.props} onChange={this.handleChange} value={value} onClick={ev => ev.stopPropagation()} />
   }
-}
-
-TextArea.propTypes = {
-  value: PropTypes.string,
-  readOnly: PropTypes.bool,
 }

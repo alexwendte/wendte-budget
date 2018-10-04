@@ -49,6 +49,9 @@ describe('rendering', () => {
     expect(getByLabelText('Expense').checked).toBeTruthy()
     expect(getByLabelText('Income').checked).not.toBeTruthy()
   })
+  it("should Only display the user's categories in the list", () => {
+    expect(true).toBeTruthy()
+  })
 })
 
 describe('interaction', () => {

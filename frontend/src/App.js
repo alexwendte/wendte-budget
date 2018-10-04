@@ -30,11 +30,12 @@ class App extends Component {
   // I can just pass user to ItemForm, no need for context!
 
   render() {
+    const { items } = this.state
     return (
       <ThemeProvider theme={theme}>
         <AppWrapper className="hi" data-testid="app">
           <ItemForm onSubmit={this.handleSubmit} />
-          <TransactionDisplay items={this.state.items} />
+          <TransactionDisplay items={items} />
         </AppWrapper>
       </ThemeProvider>
     )

@@ -1,10 +1,27 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+// @flow strict
+
+import * as React from 'react'
 import styled from 'styled-components'
 import { isNotNumber } from 'utils/utils'
 import { transition } from 'utils/mixins'
 
-export default class AmountInput extends Component {
+type Props = {
+  id?: string,
+  // eslint-disable-next-line
+  'aria-label'?: string,
+  placeholder?: string,
+  value?: string,
+  className?: ?string,
+  inTable?: boolean,
+  readOnly?: boolean,
+}
+
+type State = {
+  inputValue: string,
+  invalid: boolean,
+}
+
+export default class AmountInput extends React.Component<Props, State> {
   static defaultProps = {
     id: 'amount',
     'aria-label': 'amount',
@@ -16,11 +33,12 @@ export default class AmountInput extends Component {
   }
 
   state = {
+    // eslint-disable-next-line
     inputValue: this.props.value || '',
     invalid: false,
   }
 
-  validateAndGetReturnString = value => {
+  validateAndGetReturnString = (value: string) => {
     const dollarParts = value.split('$')
     const { inTable } = this.props
 
@@ -39,7 +57,7 @@ export default class AmountInput extends Component {
     return { invalid, returnString: withMinusAndDollar(value) }
   }
 
-  handleChange = ev => {
+  handleChange = (ev: SyntheticEvent<HTMLInputElement>) => {
     ev.preventDefault()
     const { value } = ev.currentTarget
     const { invalid, returnString } = this.validateAndGetReturnString(value)
@@ -52,6 +70,7 @@ export default class AmountInput extends Component {
       this.setState({ inputValue: returnString, invalid: false })
     }
   }
+
   handleBlur = () => {
     this.setState(state => {
       const noDollar = state.inputValue.replace('$', '')
@@ -65,12 +84,13 @@ export default class AmountInput extends Component {
 
   render() {
     const { readOnly, className, ...rest } = this.props
+    const { inputValue, invalid } = this.state
     return (
-      <Input
+      <StyledInput
         {...rest}
-        value={this.state.inputValue}
+        value={inputValue}
         onChange={this.handleChange}
-        className={`${className} ${this.state.invalid ? 'invalid' : undefined} `}
+        className={`${className || ''} ${invalid ? 'invalid' : ''} `}
         onBlur={this.handleBlur}
         onClick={ev => !readOnly && ev.stopPropagation()}
         readOnly={readOnly}
@@ -78,18 +98,7 @@ export default class AmountInput extends Component {
     )
   }
 }
-
-AmountInput.propTypes = {
-  id: PropTypes.string,
-  'aria-label': PropTypes.string,
-  placeholder: PropTypes.string,
-  value: PropTypes.string,
-  className: PropTypes.string,
-  inTable: PropTypes.bool,
-  readOnly: PropTypes.bool,
-}
-
-const Input = styled.input`
+const StyledInput = styled.input`
   @keyframes invalid {
     0% {
       transform: translateX(0);

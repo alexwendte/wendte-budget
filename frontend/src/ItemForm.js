@@ -1,21 +1,33 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+// @flow
+
+import * as React from 'react'
 import styled from 'styled-components'
 import { media } from 'utils/mixins'
-import AmountInput from './components/AmountInput'
+import AmountInput from 'components/AmountInput'
 
-const ItemForm = props => {
+type Props = {
+  onSubmit: (obj: {
+    title: string,
+    amount: ?number,
+    category: string,
+    date: string,
+    type: string,
+    notes: string,
+  }) => void,
+}
+
+const ItemForm = (props: Props) => {
   const now = new Date(Date.now())
   const nowForInput = now.toISOString().slice(0, 10)
-  const convertToNumAndRemoveDSign = str => parseInt(str.slice(1), 10) || ''
+  const convertToNumAndRemoveDSign = (str: string): ?number => parseInt(str.slice(1), 10) || null
 
-  const handleSubmit = ev => {
+  const handleSubmit = (ev: SubmitEvent) => {
     ev.preventDefault()
     const { title, amount: stringAmount, category, date, type, notes } = ev.currentTarget.elements
     const amount = convertToNumAndRemoveDSign(stringAmount.value)
     const elements = Array.from(ev.currentTarget.elements)
     const shouldContinue = !elements.some(el => el.required && el.value === '')
-    if (shouldContinue) {
+    if (shouldContinue && props.onSubmit) {
       props.onSubmit({
         title: title.value,
         amount,
@@ -69,14 +81,6 @@ const ItemForm = props => {
 }
 
 export default ItemForm
-
-ItemForm.propTypes = {
-  onSubmit: PropTypes.func,
-}
-
-ItemForm.defaultProps = {
-  onSubmit: () => {},
-}
 
 const ItemFormWrapper = styled.div`
   margin: 2rem;
