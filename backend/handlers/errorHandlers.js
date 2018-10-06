@@ -6,8 +6,7 @@
   catchErrors(), catch any errors they throw, and pass it along to our express middleware with next()
 */
 
-exports.catchErrors = fn =>
-  function(req, res, next) {
+exports.catchErrors = fn => function(req, res, next) {
     return fn(req, res, next).catch(next)
   }
 
@@ -51,6 +50,7 @@ exports.developmentErrors = (err, req, res, next) => {
     stackHighlighted: err.stack.replace(/[a-z_-\d]+.js:\d+:\d+/gi, '<mark>$&</mark>'),
   }
   res.status(err.status || 500)
+  res.json(errorDetails)
 
   /* res.format({
     // Based on the `Accept` http header

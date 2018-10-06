@@ -4,80 +4,101 @@ import * as React from 'react'
 import styled from 'styled-components'
 import { media } from 'utils/mixins'
 import AmountInput from 'components/AmountInput'
+import * as api from 'utils/api'
 
 type Props = {
-  onSubmit: (obj: {
-    title: string,
-    amount: ?number,
-    category: string,
-    date: string,
-    type: string,
-    notes: string,
-  }) => void,
+  user: Object,
 }
 
-const ItemForm = (props: Props) => {
-  const now = new Date(Date.now())
-  const nowForInput = now.toISOString().slice(0, 10)
-  const convertToNumAndRemoveDSign = (str: string): ?number => parseInt(str.slice(1), 10) || null
+type State = {
+  categories?: Array,
+}
 
-  const handleSubmit = (ev: SubmitEvent) => {
-    ev.preventDefault()
-    const { title, amount: stringAmount, category, date, type, notes } = ev.currentTarget.elements
-    const amount = convertToNumAndRemoveDSign(stringAmount.value)
-    const elements = Array.from(ev.currentTarget.elements)
-    const shouldContinue = !elements.some(el => el.required && el.value === '')
-    if (shouldContinue && props.onSubmit) {
-      props.onSubmit({
-        title: title.value,
-        amount,
-        category: category.value,
-        date: new Date(date.value).toISOString(),
-        type: type.value,
-        notes: notes.value,
-      })
-    }
+class ItemForm extends React.Component<Props, State> {
+  static defaultProps = {
+    categories: null,
   }
 
-  return (
-    <ItemFormWrapper className="item-form">
-      <h2 className="heading">Create Transaction</h2>
-      <Form onSubmit={handleSubmit}>
-        <DateInputGroup>
-          <label htmlFor="date">Date</label>
-          <input type="date" id="date" name="date" defaultValue={nowForInput} required />
-        </DateInputGroup>
-        <TitleInputGroup>
-          <label htmlFor="title">Transaction Title</label>
-          <input type="text" id="title" name="title" placeholder="Ramen Noodles" required />
-        </TitleInputGroup>
-        <CategoryInputGroup>
-          <label htmlFor="category">Item Category</label>
-          <input type="text" id="category" name="category" placeholder="Groceries" required />
-        </CategoryInputGroup>
-        <AmountInputGroup>
-          <label htmlFor="amount">Amount</label>
-          <AmountInput id="amount" name="amount" placeholder="$3.78" required />
-        </AmountInputGroup>
-        <TypeInputGroup>
-          <fieldset>
-            <legend>Transaction Type</legend>
-            <label htmlFor="expenseInput">Expense</label>
-            <input type="radio" name="type" value="Expense" id="expenseInput" defaultChecked />
-            <label htmlFor="incomeInput">Income</label>
-            <input type="radio" name="type" value="Income" id="incomeInput" />
-          </fieldset>
-        </TypeInputGroup>
-        <NotesInputGroup>
-          <label htmlFor="notes">Notes</label>
-          <textarea id="notes" name="notes" placeholder="Brianna is my love so I bought her something nice" />
-        </NotesInputGroup>
-        <SubmitButton type="submit" onSubmit={handleSubmit}>
-          Submit
-        </SubmitButton>
-      </Form>
-    </ItemFormWrapper>
-  )
+  componentDidMount() {
+    api.categories
+      .get()
+      .then(({ categories }) => this.setState({ categories }))
+      .catch(err => console.log(err))
+  }
+
+  render() {
+    const now = new Date(Date.now())
+    const nowForInput = now.toISOString().slice(0, 10)
+    const convertToNumAndRemoveDSign = (str: string): ?number => parseInt(str.slice(1), 10) || null
+
+    const handleSubmit = (ev: SubmitEvent) => {
+      ev.preventDefault()
+      const { title, amount: stringAmount, category, date, type, notes } = ev.currentTarget.elements
+      const amount = convertToNumAndRemoveDSign(stringAmount.value)
+      const elements = Array.from(ev.currentTarget.elements)
+      const shouldContinue = !elements.some(el => el.required && el.value === '')
+      if (shouldContinue) {
+        api.transactions
+          .create({
+            title: title.value,
+            amount,
+            category: category.value,
+            date: new Date(date.value).toISOString(),
+            type: type.value,
+            notes: notes.value,
+          })
+          .then(() => {})
+      }
+    }
+
+    return (
+      <ItemFormWrapper className="item-form">
+        <h2 className="heading">Create Transaction</h2>
+        <Form onSubmit={handleSubmit}>
+          <DateInputGroup>
+            <label htmlFor="date">Date</label>
+            <input type="date" id="date" name="date" defaultValue={nowForInput} required />
+          </DateInputGroup>
+          <TitleInputGroup>
+            <label htmlFor="title">Transaction Title</label>
+            <input type="text" id="title" name="title" placeholder="Ramen Noodles" required />
+          </TitleInputGroup>
+          <CategoryInputGroup>
+            <label htmlFor="category">Item Category</label>
+            <select id="category" name="category" required>
+              {this.state
+                && this.state.categories
+                && this.state.categories.map(cat => (
+                  <option value={cat.toLowerCase()} key={cat}>
+                    {cat}
+                  </option>
+                ))}
+            </select>
+          </CategoryInputGroup>
+          <AmountInputGroup>
+            <label htmlFor="amount">Amount</label>
+            <AmountInput id="amount" name="amount" placeholder="$3.78" required />
+          </AmountInputGroup>
+          <TypeInputGroup>
+            <fieldset>
+              <legend>Transaction Type</legend>
+              <label htmlFor="expenseInput">Expense</label>
+              <input type="radio" name="type" value="Expense" id="expenseInput" defaultChecked />
+              <label htmlFor="incomeInput">Income</label>
+              <input type="radio" name="type" value="Income" id="incomeInput" />
+            </fieldset>
+          </TypeInputGroup>
+          <NotesInputGroup>
+            <label htmlFor="notes">Notes</label>
+            <textarea id="notes" name="notes" placeholder="Brianna is my love so I bought her something nice" />
+          </NotesInputGroup>
+          <SubmitButton type="submit" onSubmit={handleSubmit}>
+            Submit
+          </SubmitButton>
+        </Form>
+      </ItemFormWrapper>
+    )
+  }
 }
 
 export default ItemForm

@@ -11,11 +11,12 @@ const cors = require('cors')
 const promisify = require('es6-promisify')
 const flash = require('connect-flash')
 const expressValidator = require('express-validator')
+const path = require('path')
 const helpers = require('./helpers')
 const errorHandlers = require('./handlers/errorHandlers')
-const routes = require('./routes/index')
+const setupRoutes = require('./routes')
+// const routes = require('./routes/index')
 
-const path = require('path')
 
 // initialize the application and create the routes
 const app = express()
@@ -25,7 +26,8 @@ app.use(helmet())
 // allow cors so my site can communicate with my back-end.
 app.use(cors())
 
-const router = express.Router()
+// const router = express.Router()
+setupRoutes(app)
 
 // so that I can look at the body of post requests
 app.use(bodyParser.json())
@@ -71,10 +73,10 @@ app.use((req, res, next) => {
 })
 
 // Serve any static files
-router.use(express.static(path.resolve(__dirname, '../frontend/build'), { maxAge: '30d' }))
+express.Router().use(express.static(path.resolve(__dirname, '../frontend/build'), { maxAge: '30d' }))
 
 // tell the app to use the above rules
-app.use('/api/', routes)
+// app.use('/api/', routes)
 
 // If that above routes didnt work, we 404 them and forward to error handler
 app.use(errorHandlers.notFound)

@@ -20,7 +20,7 @@
     "import/no-extraneous-dependencies": 0,
     "import/no-unresolved": 0,
     "linebreak-style": ["error", "windows"],
-    "space-before-function-paren": [2, "never"],
+    "space-before-function-paren": 0,
     "indent": 0,
     "no-trailing-spaces": 0,
     "no-mixed-operators": 0,

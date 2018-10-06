@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import axios from 'axios'
 import { transactions as fakeTransactions } from 'utils/fakeData'
+import User from 'components/User'
 import './styles/App.css'
 import ItemForm from './ItemForm'
+
 import TransactionDisplay from './transactionDisplay/TransactionDisplay'
 
 const theme = {
@@ -21,12 +23,6 @@ class App extends Component {
     items: fakeTransactions,
   }
 
-  handleSubmit = obj => {
-    this.setState(state => ({ items: [...state.items, obj] }))
-    console.log(obj)
-    axios.post('/api/addTransaction', obj)
-  }
-
   // I can just pass user to ItemForm, no need for context!
 
   render() {
@@ -34,8 +30,14 @@ class App extends Component {
     return (
       <ThemeProvider theme={theme}>
         <AppWrapper className="hi" data-testid="app">
-          <ItemForm onSubmit={this.handleSubmit} />
-          <TransactionDisplay items={items} />
+          <User>
+            {({ user, error, pending, login, logout, register }) => (
+              <>
+                <ItemForm user={user} />
+                <TransactionDisplay items={items} />
+              </>
+            )}
+          </User>
         </AppWrapper>
       </ThemeProvider>
     )
