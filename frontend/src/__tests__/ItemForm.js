@@ -65,15 +65,18 @@ describe('rendering', () => {
     expect(getByLabelText('Expense').checked).toBeTruthy()
     expect(getByLabelText('Income').checked).not.toBeTruthy()
   })
-  it("should only display the user's categories in the list", async () => {
-    const fakeCategories = ['Groceries', 'Web Development']
-    apiMock.categories.get.mockImplementationOnce(() => Promise.resolve({ categories: fakeCategories }))
-    const { getByLabelText } = setup()
-    const categoryInput = getByLabelText('Item Category')
-    await wait(() => {
-      expect(categoryInput.options[0].value).toBe(fakeCategories[0].toLowerCase())
+  describe('categories', () => {
+    it("should only display the user's categories in the list", async () => {
+      const fakeCategories = ['Groceries', 'Web Development']
+      apiMock.categories.get.mockImplementationOnce(() => Promise.resolve({ categories: fakeCategories }))
+      const { getByLabelText } = setup()
+      const categoryInput = getByLabelText('Item Category')
+      await wait(() => {
+        expect(categoryInput.options[0].value).toBe(fakeCategories[0].toLowerCase())
+      })
+      expect(categoryInput.options[1].value).toBe(fakeCategories[1].toLowerCase())
     })
-    expect(categoryInput.options[1].value).toBe(fakeCategories[1].toLowerCase())
+    it.skip('should display create a category', () => {})
   })
 })
 
@@ -108,6 +111,8 @@ describe('interaction', () => {
       notes: fakeForm.notes,
     })
   })
+
+  it.skip('should render create a category when that option is selected', () => {})
 
   it('should only allow Expense or Income to be selected', () => {
     const { getByLabelText } = setup()

@@ -6,12 +6,12 @@ const transactionSchema = new mongoose.Schema({
   title: {
     type: String,
     trim: true,
-    required: 'Please enter an item name',
+    required: 'Please enter an transaction name',
   },
   amount: {
     type: String,
     trim: true,
-    required: 'Please enter an item amount',
+    required: 'Please enter an transaction amount',
   },
   category: {
     type: String,

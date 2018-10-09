@@ -10,6 +10,7 @@ class TransactionRow extends React.Component {
   static defaultProps = {
     readOnly: true,
   }
+
   state = {
     expandNotes: false,
   }

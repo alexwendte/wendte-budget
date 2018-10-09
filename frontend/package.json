@@ -16,7 +16,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "f": "flow",
-    "test:coverage": "react-scripts test --env=jsdom --coverage"
+    "coverage": "react-scripts test --env=jsdom --coverage"
   },
   "devDependencies": {
     "eslint-config-airbnb": "^17.1.0",
@@ -24,7 +24,9 @@
     "eslint-plugin-graphql": "^2.1.1",
     "eslint-plugin-jest": "^21.22.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
+    "faker": "^4.1.0",
     "flow-bin": "^0.82.0",
+    "jest": "^23.6.0",
     "react-scripts": "^2.0.3",
     "react-testing-library": "^5.1.0"
   },
@@ -39,7 +41,8 @@
       "!src/index.js",
       "!src/utils/colors.js",
       "!src/utils/mixins.js",
-      "!src/utils/fakeData.js"
+      "!src/utils/fakeData.js",
+      "!src/utils/api.js"
     ]
   },
   "browserslist": [
