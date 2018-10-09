@@ -4,6 +4,5 @@
   "printWidth": 120,
   "arrowParens": "avoid",
   "semi": false,
-  "bracketSpacing": false,
   "jsxBracketSameLine": false
 }

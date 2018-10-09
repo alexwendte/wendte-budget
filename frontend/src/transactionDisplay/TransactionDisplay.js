@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { elevation, media } from 'utils/mixins'
 import styled from 'styled-components'
+// import { transactions } from 'utils/api'
 
 import TransactionRow from './TransactionRow'
 
@@ -13,13 +14,19 @@ class TransactionDisplay extends Component {
   state = {
     readOnly: true,
   }
+
+  async componentDidMount() {
+    // const results = await transactions.get()
+  }
+
   editTransaction = () => {
     this.setState(({ readOnly }) => ({ readOnly: !readOnly }))
   }
+
   render() {
     const { items } = this.props
     const { readOnly } = this.state
-    // I imaagine the save changes will be a button with type submit.
+    // I imagine the save changes will be a button with type submit.
     // Doesn't that mean that the whole table is a form?
     // How will I decide what data was changed? I only want to update the transaciton that was changes.
     // Each transaction should have an id. When it is changed, I will include that id in the list of id's that were changed.

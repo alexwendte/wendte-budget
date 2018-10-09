@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
-import axios from 'axios'
 import { transactions as fakeTransactions } from 'utils/fakeData'
 import User from 'components/User'
 import './styles/App.css'
@@ -31,7 +30,8 @@ class App extends Component {
       <ThemeProvider theme={theme}>
         <AppWrapper className="hi" data-testid="app">
           <User>
-            {({ user, error, pending, login, logout, register }) => (
+            {/* eslint-disable-next-line */
+            ({ user, error, pending, login, logout, register }) => (
               <>
                 <ItemForm user={user} />
                 <TransactionDisplay items={items} />
