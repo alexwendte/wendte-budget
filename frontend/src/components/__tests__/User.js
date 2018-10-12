@@ -71,56 +71,6 @@ describe('interaction', () => {
     )
   })
 
-  it('should rerender with errors when login fails', async () => {
-    const { controller, children } = await setup()
-
-    const fakeError = { mock: 'failure' }
-    // eslint-disable-next-line
-    apiMock.auth.login.mockImplementationOnce(() => Promise.reject({ error: fakeError }))
-
-    controller.login().catch(err => err)
-
-    expect(apiMock.auth.login).toHaveBeenCalledTimes(1)
-    await wait(() => expect(children).toHaveBeenCalledTimes(2))
-    expect(children).toHaveBeenCalledWith(
-      expect.objectContaining({
-        pending: true,
-        error: null,
-        user: null,
-      })
-    )
-    expect(children).toHaveBeenLastCalledWith(
-      expect.objectContaining({
-        pending: false,
-        error: fakeError,
-        user: null,
-      })
-    )
-  })
-
-  it('should rerender with null user when logout is clicked', async () => {
-    const { controller, children } = await setup()
-
-    controller.logout()
-
-    expect(apiMock.auth.logout).toHaveBeenCalledTimes(1)
-    await wait(() => expect(children).toHaveBeenCalledTimes(2))
-    expect(children).toHaveBeenCalledWith(
-      expect.objectContaining({
-        pending: true,
-        error: null,
-        user: null,
-      })
-    )
-    expect(children).toHaveBeenLastCalledWith(
-      expect.objectContaining({
-        pending: false,
-        error: null,
-        user: null,
-      })
-    )
-  })
-
   it('should return the user if they registered successfully', async () => {
     const { controller } = await setup()
     const fakeUser = { username: faker.internet.userName() }
@@ -135,6 +85,56 @@ describe('interaction', () => {
   })
 })
 
+it('should rerender with null user when logout is clicked', async () => {
+  const { controller, children } = await setup()
+
+  controller.logout()
+
+  expect(apiMock.auth.logout).toHaveBeenCalledTimes(1)
+  await wait(() => expect(children).toHaveBeenCalledTimes(2))
+  expect(children).toHaveBeenCalledWith(
+    expect.objectContaining({
+      pending: true,
+      error: null,
+      user: null,
+    })
+  )
+  expect(children).toHaveBeenLastCalledWith(
+    expect.objectContaining({
+      pending: false,
+      error: null,
+      user: null,
+    })
+  )
+})
+
+it('should rerender with errors when login fails', async () => {
+  const { controller, children } = await setup()
+
+  const fakeError = { mock: 'failure' }
+  // eslint-disable-next-line
+  apiMock.auth.login.mockImplementationOnce(() => Promise.reject({ error: fakeError }))
+
+  controller.login().catch(err => err)
+
+  expect(apiMock.auth.login).toHaveBeenCalledTimes(1)
+  await wait(() => expect(children).toHaveBeenCalledTimes(2))
+  expect(children).toHaveBeenCalledWith(
+    expect.objectContaining({
+      pending: true,
+      error: null,
+      user: null,
+    })
+  )
+  expect(children).toHaveBeenLastCalledWith(
+    expect.objectContaining({
+      pending: false,
+      error: fakeError,
+      user: null,
+    })
+  )
+})
+
 it('should rerender with errors when register fails', async () => {
   const { controller, children } = await setup()
 
@@ -145,6 +145,33 @@ it('should rerender with errors when register fails', async () => {
   controller.register().catch(err => err)
 
   expect(apiMock.auth.register).toHaveBeenCalledTimes(1)
+  await wait(() => expect(children).toHaveBeenCalledTimes(2))
+  expect(children).toHaveBeenCalledWith(
+    expect.objectContaining({
+      pending: true,
+      error: null,
+      user: null,
+    })
+  )
+  expect(children).toHaveBeenLastCalledWith(
+    expect.objectContaining({
+      pending: false,
+      error: fakeError,
+      user: null,
+    })
+  )
+})
+
+it('should rerender with logout when register fails', async () => {
+  const { controller, children } = await setup()
+
+  const fakeError = { mock: 'failure' }
+  // eslint-disable-next-line
+  apiMock.auth.logout.mockImplementationOnce(() => Promise.reject({ error: fakeError }))
+
+  controller.logout().catch(err => err)
+
+  expect(apiMock.auth.logout).toHaveBeenCalledTimes(1)
   await wait(() => expect(children).toHaveBeenCalledTimes(2))
   expect(children).toHaveBeenCalledWith(
     expect.objectContaining({

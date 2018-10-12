@@ -52,7 +52,7 @@ TransactionRow.propTypes = {
 }
 
 const Row = styled.div`
-  grid-gap: 1.5rem;
+  grid-column-gap: 1.5rem;
   padding: 1.5rem;
   color: white;
   display: grid;

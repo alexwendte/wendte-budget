@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { elevation, media } from 'utils/mixins'
 import styled from 'styled-components'
-import { transactions } from 'utils/api'
+import * as api from 'utils/api'
 
 import TransactionRow from './TransactionRow'
 
@@ -14,9 +13,7 @@ class TransactionDisplay extends Component {
   }
 
   async componentDidMount() {
-    const results = await transactions.get()
-    console.log(results)
-    console.log(results)
+    const results = await api.transactions.get()
     this.setState({ items: results, loading: false })
   }
 
@@ -47,7 +44,7 @@ class TransactionDisplay extends Component {
             <div className="amount">Amount</div>
           </TableHeader>
           {items.map(item => (
-            <TransactionRow item={item} key={item.name + item.date} readOnly={readOnly} />
+            <TransactionRow item={item} key={item._id} readOnly={readOnly} />
           ))}
         </TableItems>
       </TransactionTable>

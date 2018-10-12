@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import styled from 'styled-components'
+import { Transition } from 'react-spring'
 import { media } from 'utils/mixins'
 import AmountInput from 'components/AmountInput'
 import * as api from 'utils/api'
@@ -12,6 +13,7 @@ type Props = {
 
 type State = {
   categories?: Array,
+  loading: boolean,
 }
 
 class ItemForm extends React.Component<Props, State> {
@@ -19,11 +21,24 @@ class ItemForm extends React.Component<Props, State> {
     categories: null,
   }
 
-  componentDidMount() {
-    api.categories
-      .get()
-      .then(({ categories }) => this.setState({ categories }))
-      .catch(err => console.log(err))
+  state = {
+    loading: true,
+    categories: null,
+    error: null,
+    submitted: false,
+  }
+
+  async componentDidMount() {
+    const { categories } = await api.categories.get()
+    this.setState({ categories, loading: false })
+  }
+
+  componentDidUpdate() {
+    if (this.state.submitted) {
+      setTimeout(() => {
+        this.setState({ submitted: false, error: null })
+      }, 2000)
+    }
   }
 
   render() {
@@ -47,12 +62,30 @@ class ItemForm extends React.Component<Props, State> {
             type: type.value,
             notes: notes.value,
           })
-          .then(() => {})
+          .then(() => this.setState({ submitted: true }))
+          .catch(err => this.setState({ submitted: true, error: err.message }))
       }
     }
 
-    return (
+    const { loading, submitted, error } = this.state
+
+    return loading ? (
+      <div data-testid="loading" hidden />
+    ) : (
       <ItemFormWrapper className="item-form">
+        <Transition
+          from={{ transform: 'translateY(-100%)' }}
+          enter={{ transform: 'translateY(0)' }}
+          leave={{ transform: 'translateY(-100%)' }}
+        >
+          {submitted
+            && !error
+            && (({ transform }) => {
+              console.log(transform)
+              return <ResponseSuccess style={{ transform }}>Transaction Created Successfully</ResponseSuccess>
+            })}
+        </Transition>
+        {error && <ResponseError data-testid="create-error">{error}</ResponseError>}
         <h2 className="heading">Create Transaction</h2>
         <Form onSubmit={handleSubmit}>
           <DateInputGroup>
@@ -69,7 +102,7 @@ class ItemForm extends React.Component<Props, State> {
               {this.state
                 && this.state.categories
                 && this.state.categories.map(cat => (
-                  <option value={cat.toLowerCase()} key={cat}>
+                  <option value={cat} key={cat}>
                     {cat}
                   </option>
                 ))}
@@ -143,7 +176,8 @@ const InputGroup = styled.div`
   input {
     display: block;
   }
-  input {
+  input,
+  select {
     width: 100%;
     border-radius: 5px;
     padding: 0.7rem 1.2rem;
@@ -201,4 +235,20 @@ const SubmitButton = styled.button`
   padding: 1rem 1.5rem;
   font-weight: 600;
   font-size: 1.8rem;
+`
+const Response = styled.h3`
+  text-align: center;
+  padding: 0.5rem;
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  font-size: 1.6rem;
+`
+const ResponseSuccess = styled(Response)`
+  background: ${props => props.theme.green};
+`
+const ResponseError = styled(Response)`
+  background: ${props => props.theme.warning};
 `

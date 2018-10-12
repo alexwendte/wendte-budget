@@ -8,6 +8,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-spring": "^5.9.2",
     "styled-components": "^3.4.9"
   },
   "scripts": {
@@ -16,7 +17,8 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "f": "flow",
-    "coverage": "react-scripts test --env=jsdom --coverage"
+    "coverage": "react-scripts test --env=jsdom --coverage",
+    "jest": "jest"
   },
   "devDependencies": {
     "eslint-config-airbnb": "^17.1.0",

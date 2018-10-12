@@ -15,8 +15,6 @@ const path = require('path')
 const helpers = require('./helpers')
 const errorHandlers = require('./handlers/errorHandlers')
 const setupRoutes = require('./routes')
-// const routes = require('./routes/index')
-
 
 // initialize the application and create the routes
 const app = express()
@@ -25,9 +23,6 @@ app.use(helmet())
 
 // allow cors so my site can communicate with my back-end.
 app.use(cors())
-
-// const router = express.Router()
-setupRoutes(app)
 
 // so that I can look at the body of post requests
 app.use(bodyParser.json())
@@ -72,11 +67,21 @@ app.use((req, res, next) => {
   next()
 })
 
+setupRoutes(app)
+
 // Serve any static files
-express.Router().use(express.static(path.resolve(__dirname, '../frontend/build'), { maxAge: '30d' }))
+app.use(express.static(path.resolve(__dirname, '../frontend/build'), { maxAge: '30d' }))
 
 // tell the app to use the above rules
 // app.use('/api/', routes)
+app.get('/*', (req, res) => {
+  console.log('Getting home')
+  res.sendFile(path.join(__dirname, '../frontend/build/index.html'), err => {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
 
 // If that above routes didnt work, we 404 them and forward to error handler
 app.use(errorHandlers.notFound)
@@ -92,13 +97,5 @@ if (app.get('env') === 'development') {
 
 // production error handler
 app.use(errorHandlers.productionErrors)
-/*
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/build/index.html'), err => {
-    if (err) {
-      res.status(500).send(err)
-    }
-  })
-}) */
 
 module.exports = app

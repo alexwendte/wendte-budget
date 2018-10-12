@@ -4,8 +4,8 @@ const Transaction = mongoose.model('Transaction')
 
 exports.createTransaction = async (req, res) => {
   const transaction = new Transaction(req.body)
-  await transaction.save()
-  res.send('Transaction Saved')
+  const newTransaction = await transaction.save()
+  res.json(newTransaction)
 }
 
 exports.getTransactions = async (req, res) => {
@@ -17,7 +17,7 @@ exports.getTransactions = async (req, res) => {
    * TODO I should do this by using the req.user's id as a db query
    */
   if (transactions) {
-    return res.json({ transactions })
+    return res.json(transactions)
   }
   return res.status(404).send()
 }

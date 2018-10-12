@@ -8,10 +8,10 @@ afterEach(cleanup)
 
 jest.mock('utils/api', () => {
   const mock = {}
-  const transactionResponse = { transactions: null }
+  const transactionResponse = [{ title: null }]
   function reset() {
     Object.assign(mock, {
-      transactions: Object.assign(mock.auth || {}, {
+      transactions: Object.assign(mock.transactions || {}, {
         get: jest.fn(() => Promise.resolve(transactionResponse)),
       }),
       reset,
@@ -25,16 +25,13 @@ beforeEach(() => {
   apiMock.reset()
 })
 
-const setup = propOverrides => {
-  const props = Object.assign(
-    {
-      items: fakeTransactions,
-    },
-    propOverrides
-  )
+const setup = async propOverrides => {
+  const props = Object.assign({}, propOverrides)
 
+  apiMock.transactions.get.mockImplementationOnce(() => Promise.resolve(fakeTransactions))
   const utils = render(<TransactionDisplay {...props} />)
 
+  await waitForElement(() => utils.getByTestId('loading'))
   return {
     props,
     ...utils,
@@ -43,16 +40,13 @@ const setup = propOverrides => {
 
 describe('rendering', () => {
   it('renders all of the items', async () => {
-    apiMock.transactions.get.mockImplementationOnce(() => fakeTransactions)
-    setup()
+    await setup()
   })
 })
 
 describe('interaction', () => {
   it('should toggle readOnly when Edit Transactions is clicked', async () => {
-    apiMock.transactions.get.mockImplementationOnce(() => fakeTransactions)
-    const { getByText, getByLabelText } = setup()
-    apiMock.transactions.get.mockImplementationOnce(() => fakeTransactions)
+    const { getByText, getByLabelText } = await setup()
 
     const firstInput = getByLabelText('table-title')
     fireEvent.click(getByText('Edit Transactions'))
@@ -63,13 +57,8 @@ describe('interaction', () => {
 })
 
 describe('lifecycle', async () => {
-  it.only('should receive the transactions we expect on componentDidMount', async () => {
-    apiMock.transactions.get.mockImplementationOnce(() => fakeTransactions)
-    expect(apiMock.transactions.get).toHaveBeenCalledTimes(0)
-    const { getByTestId } = setup()
-    expect(apiMock.transactions.get).toHaveBeenCalledTimes(1)
-    // await wait(() => expect(apiMock.transactions.get).toHaveBeenCalledTimes(10))
-    expect(await apiMock.transactions.get()).toEqual(fakeTransactions)
+  it('should call transaction api on componentDidMount', async () => {
+    setup()
     expect(apiMock.transactions.get).toHaveBeenCalledTimes(1)
   })
 })

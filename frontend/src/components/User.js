@@ -9,7 +9,7 @@ export default class User extends Component {
 
   componentDidMount() {
     this.reset({ pending: true })
-    return api.auth.me().then(({ user }) => this.reset({ user }), ({ error }) => Promise.reject(this.reset({ error })))
+    return api.auth.me().then(({ user }) => this.reset({ user }), ({ error }) => this.reset({ error }))
   }
 
   login = (...args) => {
