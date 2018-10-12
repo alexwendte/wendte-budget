@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import User from 'components/User'
 import './styles/App.css'
@@ -17,25 +17,21 @@ const theme = {
   warning: '#bb0000',
 }
 
-class App extends Component {
-  render() {
-    return (
-      <ThemeProvider theme={theme}>
-        <AppWrapper className="hi" data-testid="app">
-          <User>
-            {/* eslint-disable-next-line */
-            ({ user, error, pending, login, logout, register }) => (
-              <>
-                <ItemForm user={user} />
-                <TransactionDisplay />
-              </>
-            )}
-          </User>
-        </AppWrapper>
-      </ThemeProvider>
-    )
-  }
-}
+const App = () => (
+  <ThemeProvider theme={theme}>
+    <AppWrapper className="hi" data-testid="app">
+      <User>
+        {/* eslint-disable-next-line */
+        ({ user, error, pending, login, logout, register }) => (
+          <>
+            <ItemForm user={user} />
+            <TransactionDisplay />
+          </>
+        )}
+      </User>
+    </AppWrapper>
+  </ThemeProvider>
+)
 
 export default App
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, cleanup, fireEvent, wait, waitForElement } from 'react-testing-library'
+import { render, cleanup, fireEvent, waitForElement } from 'react-testing-library'
 import { transactions as fakeTransactions } from 'utils/fakeData'
 import * as apiMock from 'utils/api'
 import TransactionDisplay from '../TransactionDisplay'

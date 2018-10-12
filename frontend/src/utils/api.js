@@ -28,7 +28,7 @@ const auth = {
     logout()
     return Promise.resolve({ user: null })
   },
-  login: form => requests.post('/auth/login, form').then(data => {
+  login: form => requests.post('/auth/login', form).then(data => {
       login({ token: data.user.token })
       return data
     }),

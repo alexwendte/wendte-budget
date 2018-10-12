@@ -18,7 +18,8 @@
     "eject": "react-scripts eject",
     "f": "flow",
     "coverage": "react-scripts test --env=jsdom --coverage",
-    "jest": "jest"
+    "jest": "jest",
+    "lint": "eslint src/**/*.js"
   },
   "devDependencies": {
     "eslint-config-airbnb": "^17.1.0",

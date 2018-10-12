@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, cleanup, fireEvent, wait } from 'react-testing-library'
+import { render, cleanup, fireEvent } from 'react-testing-library'
 import AmountInput from 'components/AmountInput'
 
 afterEach(cleanup)

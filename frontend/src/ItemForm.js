@@ -7,16 +7,12 @@ import { media } from 'utils/mixins'
 import AmountInput from 'components/AmountInput'
 import * as api from 'utils/api'
 
-type Props = {
-  user: Object,
-}
-
 type State = {
   categories?: Array,
   loading: boolean,
 }
 
-class ItemForm extends React.Component<Props, State> {
+class ItemForm extends React.Component<{}, State> {
   static defaultProps = {
     categories: null,
   }
@@ -80,10 +76,9 @@ class ItemForm extends React.Component<Props, State> {
         >
           {submitted
             && !error
-            && (({ transform }) => {
-              console.log(transform)
-              return <ResponseSuccess style={{ transform }}>Transaction Created Successfully</ResponseSuccess>
-            })}
+            && (({ transform }) => (
+              <ResponseSuccess style={{ transform }}>Transaction Created Successfully</ResponseSuccess>
+            ))}
         </Transition>
         {error && <ResponseError data-testid="create-error">{error}</ResponseError>}
         <h2 className="heading">Create Transaction</h2>

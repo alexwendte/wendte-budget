@@ -36,7 +36,7 @@
     "object-curly-newline": 0,
     "function-paren-newline": 0,
     "no-unused-vars": [
-      1,
+      2,
       {
         "argsIgnorePattern": "res|next|^err"
       }
@@ -90,8 +90,6 @@
     "react/display-name": 1,
     "react/react-in-jsx-scope": 0,
     "react/prefer-stateless-function": 1,
-    "react/no-unused-prop-types": 1,
-    "react/no-unused-state": 1,
     "react/forbid-prop-types": 0,
     "react/jsx-one-expression-per-line": 0,
     "react/no-unescaped-entities": 0,

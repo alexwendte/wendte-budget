@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, cleanup, fireEvent } from 'react-testing-library'
+import { render, cleanup } from 'react-testing-library'
 import BudgetTool from '../BudgetTool'
 
 afterEach(cleanup)
@@ -23,6 +23,9 @@ const setup = propOverrides => {
 }
 
 describe('render', () => {
+  it('should render', () => {
+    setup()
+  })
   it('should show how much is left to spend/save/invest in each of users saved budget lines for the month', () => {})
   it('should show the amount the user has spent in each category', () => {})
 })
