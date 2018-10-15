@@ -22,8 +22,8 @@ class TransactionRow extends React.Component {
     this.setState(({ expandNotes }) => ({ expandNotes: !expandNotes && this.props.item.notes }))
   }
 
-  handleDelete = async () => {
-    await api.categories.delete(this.props.item._id)
+  handleDelete = () => {
+    api.categories.delete(this.props.item._id)
     // TODO delete this row from the table
   }
 
@@ -31,7 +31,13 @@ class TransactionRow extends React.Component {
     const { title, category, date, notes, type, amount } = this.props.item
     const { readOnly } = this.props
     return (
-      <Row data-testid="budget-item" tabIndex="0" role="button" onClick={this.handleClick}>
+      <Row
+        data-testid="budget-item"
+        tabIndex="0"
+        role="button"
+        onClick={this.handleClick}
+        className={readOnly ? '' : 'editable'}
+      >
         <Title type="text" aria-label="table-title" value={title} readOnly={readOnly} />
         <Dates type="text" aria-label="table-date" value={new Date(date).toDateString()} readOnly={readOnly} />
         <Category type="text" aria-label="table-category" value={category} readOnly={readOnly} />
@@ -45,9 +51,21 @@ class TransactionRow extends React.Component {
             inTable
           />
         }
-        {notes ? <ExpandButton data-testid="expand-button">&#9660;</ExpandButton> : null}
+        {notes ? (
+          <ExpandButton data-testid="expand-button" className={readOnly ? '' : 'editable'}>
+            &#9660;
+          </ExpandButton>
+        ) : null}
         {this.state.expandNotes && notes ? <Notes value={notes} aria-label="table-notes" readOnly={readOnly} /> : null}
-        {!readOnly && <Icon name="delete" color={theme.warning} onClick={this.handleDelete} />}
+        {!readOnly && (
+          <Delete
+            name="delete"
+            color={theme.warning}
+            onClick={this.handleDelete}
+            height="2.4"
+            className="delete-icon"
+          />
+        )}
       </Row>
     )
   }
@@ -65,7 +83,7 @@ const Row = styled.div`
   padding: 0.7rem 1.5rem;
   color: white;
   display: grid;
-  grid-template-columns: repeat(3, minmax(12.5rem, 1fr)) 10rem 1rem;
+  grid-template-columns: repeat(3, minmax(12.5rem, 1fr)) 10rem 2rem;
   grid-template-rows: 1fr;
   grid-auto-rows: minmax(10rem, auto);
   background: ${props => props.theme.black};
@@ -76,15 +94,34 @@ const Row = styled.div`
     background: ${props => props.theme.grey};
   }
 
+  &.editable {
+    padding: 1rem 1.5rem;
+    grid-template-columns: repeat(3, minmax(12.5rem, 1fr)) 10rem 2rem 2rem;
+
+    ${media.tabletPort`
+    grid-template-columns: minmax(12.5rem, 1fr) 1fr minmax(9rem, 1fr) 2rem 2rem;
+    `};
+    ${media.phone`
+    grid-template-columns: minmax(12.5rem, 2fr) 1fr minmax(9rem, 1fr) 2rem 2rem;
+    `};
+
+    &:hover,
+    &:focus-within {
+      .delete-icon {
+        visibility: visible;
+      }
+    }
+  }
+
   ${media.tabletPort`
   grid-gap: 0;
-  grid-template-columns: minmax(12.5rem, 1fr) 1fr minmax(9rem, 1fr) 1.6rem;
+  grid-template-columns: minmax(12.5rem, 1fr) 1fr minmax(9rem, 1fr) 2rem;
   grid-template-rows: repeat(3, 1fr);
   padding: .5rem 1rem;
   font-size: 1.4rem;
   `};
   ${media.phone`
-    grid-template-columns: minmax(12.5rem, 2fr) 1fr minmax(9rem, 2fr) 1.6rem;
+    grid-template-columns: minmax(12.5rem, 2fr) 1fr minmax(9rem, 2fr) 2rem;
   `};
 `
 const TableInput = styled(Input)`
@@ -150,7 +187,7 @@ const Amount = styled(AmountInput)`
   `};
 `
 const Notes = styled(TextArea)`
-  background: ${props => props.theme.lightGrey};
+  background: ${props => props.theme.white};
   color: ${props => props.theme.black};
   padding: 1rem 2rem;
   grid-column: 1 / -1;
@@ -170,9 +207,27 @@ const ExpandButton = styled.button`
   border-radius: 30px;
   border: none;
   padding: 0;
+  grid-column: -2;
+  &.editable {
+    grid-column: -3;
+  }
+  &:hover {
+    cursor: pointer;
+  }
 
   ${media.tabletPort`
   grid-row: 2;
   grid-column: 4;
+  `};
+`
+
+const Delete = styled(Icon)`
+  grid-column: -2;
+  visibility: hidden;
+  &:hover {
+    cursor: pointer;
+  }
+  ${media.tabletPort`
+    grid-row: 2;
   `};
 `

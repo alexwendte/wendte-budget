@@ -123,6 +123,7 @@ describe('interaction', () => {
     expect(apiMock.categories.delete).toHaveBeenCalledTimes(1)
     expect(apiMock.categories.delete).toHaveBeenCalledWith(fakeId)
   })
+  it('should delete the transaction from the page when the delete button is pressed', () => {})
 })
 
 describe('lifecycle', () => {})

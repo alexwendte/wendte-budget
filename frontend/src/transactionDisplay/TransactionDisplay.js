@@ -56,7 +56,6 @@ export default TransactionDisplay
 
 const TransactionTable = styled.div`
   padding: 4rem;
-  width: 90%;
   display: flex;
   flex-direction: column;
   .heading {
