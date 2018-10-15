@@ -53,7 +53,7 @@ TransactionRow.propTypes = {
 
 const Row = styled.div`
   grid-column-gap: 1.5rem;
-  padding: 1.5rem;
+  padding: 0.7rem 1.5rem;
   color: white;
   display: grid;
   grid-template-columns: repeat(3, minmax(12.5rem, 1fr)) 10rem 1rem;
@@ -71,7 +71,7 @@ const Row = styled.div`
   grid-gap: 0;
   grid-template-columns: minmax(12.5rem, 1fr) 1fr minmax(9rem, 1fr) 1.6rem;
   grid-template-rows: repeat(3, 1fr);
-  padding: 1rem;
+  padding: .5rem 1rem;
   font-size: 1.4rem;
   `};
   ${media.phone`
@@ -80,21 +80,20 @@ const Row = styled.div`
 `
 const TableInput = styled(Input)`
   width: 100%;
-  color: ${props => props.theme.grey};
-  padding: 0.7rem;
+  color: ${props => props.theme.white};
+  padding: 0.6rem 0.7rem;
   border-radius: 5px;
-  border: none;
-  background: ${props => props.theme.lightGrey};
-  margin: 0.5rem 0;
-  font-weight: 500;
+  border: 1px solid white;
+  background: none;
+  font-weight: 300;
   font-size: 1.6rem;
   &:read-only {
-    font-weight: 400;
-    background: none;
-    color: white;
-    padding: 0;
-    margin: 0;
+    border: none;
+    padding: 0.7rem 0.8rem;
   }
+  ${media.tabletPort`
+    margin: .2rem 0;
+  `};
 `
 const Title = styled(TableInput)``
 const Dates = styled(TableInput)`
@@ -117,21 +116,18 @@ const Category = styled(TableInput)`
 `
 const Amount = styled(AmountInput)`
   font-size: 1.6rem;
-  font-weight: 400;
+  font-weight: 300;
   text-align: right;
-  padding: 0.7rem;
+  padding: 0.6rem 0.7rem;
   border-radius: 5px;
-  border: none;
-  background: ${props => props.theme.lightGrey};
+  border: 1px solid ${props => props.theme.white};
+  color: ${props => props.theme.white};
+  background: none;
   width: 100%;
   &.table:read-only {
-    font-weight: 300;
-    background: none;
-    color: white;
     border: none;
     animation: none;
-    border: none;
-    padding: 0;
+    padding: 0.7rem 0.8rem;
   }
   &.table.income {
     color: ${props => props.theme.green};
@@ -141,6 +137,7 @@ const Amount = styled(AmountInput)`
     grid-column: 3;
     justify-self: right;
     margin-right: 1rem;
+    font-size: 1.4rem;
   `};
 `
 const Notes = styled(TextArea)`
