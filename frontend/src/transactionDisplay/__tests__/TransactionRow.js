@@ -1,17 +1,43 @@
 import React from 'react'
 import { render, cleanup, fireEvent } from 'react-testing-library'
+import * as apiMock from 'utils/api'
+import faker from 'faker'
 import TransactionRow from '../TransactionRow'
+
+jest.mock('utils/api', () => {
+  const mock = {}
+  const categoryResponse = [{ category: null }]
+  function reset() {
+    Object.assign(mock, {
+      categories: Object.assign(mock.categories || {}, {
+        delete: jest.fn(() => Promise.resolve(categoryResponse)),
+      }),
+      reset,
+    })
+  }
+  reset()
+  return mock
+})
+
+beforeEach(() => {
+  apiMock.reset()
+})
 
 afterEach(cleanup)
 
 const setup = (propOverrides, { item } = {}) => {
+  const fakeItem = {
+    _id: faker.random.uuid(),
+    title: faker.commerce.productName(),
+    amount: parseInt(faker.commerce.price(), 10),
+    category: faker.commerce.productAdjective(),
+    date: faker.date.recent(),
+    // date: '2018-08-14T00:00:00.000Z',
+    type: 'income',
+  }
   const props = {
     item: {
-      title: 'Level Up Tuts',
-      amount: 20,
-      category: 'Web Development',
-      date: '2018-08-14T00:00:00.000Z',
-      type: 'income',
+      ...fakeItem,
       ...item,
     },
     ...propOverrides,
@@ -61,10 +87,18 @@ describe('rendering', () => {
     const { queryByText } = setup({ item: { type: 'expense' } })
     expect(queryByText('expense')).not.toBeTruthy()
   })
-  test('inputs should start as readOnly', () => {
+  it('should initially have readOnly inputs', () => {
     const { getByLabelText } = setup()
     const title = getByLabelText('table-title')
     expect(title.readOnly).toBeTruthy()
+  })
+  it('should not render the delete button initially', () => {
+    const { queryByLabelText } = setup()
+    expect(queryByLabelText(/delete/i)).toBeNull()
+  })
+  it('should render the delete button if readOnly is false', () => {
+    const { getByLabelText } = setup({ readOnly: false })
+    expect(getByLabelText(/delete/i)).toBeTruthy()
   })
 })
 
@@ -76,10 +110,18 @@ describe('interaction', () => {
     fireEvent.click(item)
     expect(getByLabelText('table-notes')).toBeTruthy()
   })
-  test('inputs should not be read only after Edit Transactions is clicked', () => {
+  it('should not have readOnly inputs after Edit Transactions is clicked', () => {
     const { getByLabelText } = setup({ readOnly: false })
     const title = getByLabelText('table-title')
     expect(title.readOnly).toBeFalsy()
+  })
+  it('should call the delete transaciton api when delete button is clicked', () => {
+    const { getByLabelText, props } = setup({ readOnly: false })
+    const deleteButton = getByLabelText(/delete/i)
+    const { _id: fakeId } = props.item
+    fireEvent.click(deleteButton)
+    expect(apiMock.categories.delete).toHaveBeenCalledTimes(1)
+    expect(apiMock.categories.delete).toHaveBeenCalledWith(fakeId)
   })
 })
 

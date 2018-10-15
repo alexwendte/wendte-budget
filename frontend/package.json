@@ -31,7 +31,7 @@
     "flow-bin": "^0.82.0",
     "jest": "^23.6.0",
     "react-scripts": "^2.0.3",
-    "react-testing-library": "^5.1.0"
+    "react-testing-library": "^5.2.0"
   },
   "jest": {
     "coverageReporters": [

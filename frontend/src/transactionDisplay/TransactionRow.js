@@ -5,6 +5,9 @@ import { media } from 'utils/mixins'
 import Input from 'components/Input'
 import AmountInput from 'components/AmountInput'
 import TextArea from 'components/TextArea'
+import Icon from 'components/Icon'
+import { theme } from 'App'
+import * as api from 'utils/api'
 
 class TransactionRow extends React.Component {
   static defaultProps = {
@@ -17,6 +20,11 @@ class TransactionRow extends React.Component {
 
   handleClick = () => {
     this.setState(({ expandNotes }) => ({ expandNotes: !expandNotes && this.props.item.notes }))
+  }
+
+  handleDelete = async () => {
+    await api.categories.delete(this.props.item._id)
+    // TODO delete this row from the table
   }
 
   render() {
@@ -39,6 +47,7 @@ class TransactionRow extends React.Component {
         }
         {notes ? <ExpandButton data-testid="expand-button">&#9660;</ExpandButton> : null}
         {this.state.expandNotes && notes ? <Notes value={notes} aria-label="table-notes" readOnly={readOnly} /> : null}
+        {!readOnly && <Icon name="delete" color={theme.warning} onClick={this.handleDelete} />}
       </Row>
     )
   }

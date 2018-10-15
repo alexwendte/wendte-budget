@@ -6,7 +6,7 @@ import ItemForm from './ItemForm'
 
 import TransactionDisplay from './transactionDisplay/TransactionDisplay'
 
-const theme = {
+export const theme = {
   primary: '#66B9Bf',
   black: '#222222',
   grey: '#354041',
