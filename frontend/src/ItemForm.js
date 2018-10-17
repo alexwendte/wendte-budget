@@ -8,19 +8,17 @@ import AmountInput from 'components/AmountInput'
 import * as api from 'utils/api'
 
 type State = {
-  categories?: Array,
+  categories?: ?Array<string>,
   loading: boolean,
+  error: string,
+  submitted: boolean,
 }
 
 class ItemForm extends React.Component<{}, State> {
-  static defaultProps = {
-    categories: null,
-  }
-
   state = {
     loading: true,
     categories: null,
-    error: null,
+    error: '',
     submitted: false,
   }
 
@@ -32,7 +30,7 @@ class ItemForm extends React.Component<{}, State> {
   componentDidUpdate() {
     if (this.state.submitted) {
       setTimeout(() => {
-        this.setState({ submitted: false, error: null })
+        this.setState({ submitted: false, error: '' })
       }, 2000)
     }
   }
