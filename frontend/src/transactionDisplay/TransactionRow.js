@@ -16,6 +16,7 @@ class TransactionRow extends React.Component {
 
   state = {
     expandNotes: false,
+    deleted: false,
   }
 
   handleClick = () => {
@@ -23,25 +24,25 @@ class TransactionRow extends React.Component {
   }
 
   handleDelete = () => {
-    api.categories.delete(this.props.item._id)
-    // TODO delete this row from the table
+    api.transactions.delete(this.props.item._id).then(this.setState({ deleted: true }))
   }
 
   render() {
     const { title, category, date, notes, type, amount } = this.props.item
     const { readOnly } = this.props
+    const { deleted, expandNotes } = this.state
     return (
-      <Row
-        data-testid="budget-item"
-        tabIndex="0"
-        role="button"
-        onClick={this.handleClick}
-        className={readOnly ? '' : 'editable'}
-      >
-        <Title type="text" aria-label="table-title" value={title} readOnly={readOnly} />
-        <Dates type="text" aria-label="table-date" value={new Date(date).toDateString()} readOnly={readOnly} />
-        <Category type="text" aria-label="table-category" value={category} readOnly={readOnly} />
-        {
+      !deleted && (
+        <Row
+          data-testid="budget-item"
+          tabIndex="0"
+          role="button"
+          onClick={this.handleClick}
+          className={readOnly ? '' : 'editable'}
+        >
+          <Title type="text" aria-label="table-title" value={title} readOnly={readOnly} />
+          <Dates type="text" aria-label="table-date" value={new Date(date).toDateString()} readOnly={readOnly} />
+          <Category type="text" aria-label="table-category" value={category} readOnly={readOnly} />
           <Amount
             className={`${type} table`}
             type="text"
@@ -50,23 +51,23 @@ class TransactionRow extends React.Component {
             readOnly={readOnly}
             inTable
           />
-        }
-        {notes ? (
-          <ExpandButton data-testid="expand-button" className={readOnly ? '' : 'editable'}>
-            &#9660;
-          </ExpandButton>
-        ) : null}
-        {this.state.expandNotes && notes ? <Notes value={notes} aria-label="table-notes" readOnly={readOnly} /> : null}
-        {!readOnly && (
-          <Delete
-            name="delete"
-            color={theme.warning}
-            onClick={this.handleDelete}
-            height="2.4"
-            className="delete-icon"
-          />
-        )}
-      </Row>
+          {notes && (
+            <ExpandButton data-testid="expand-button" className={readOnly ? '' : 'editable'}>
+              &#9660;
+            </ExpandButton>
+          )}
+          {expandNotes && notes && <Notes value={notes} aria-label="table-notes" readOnly={readOnly} />}
+          {!readOnly && (
+            <Delete
+              name="delete"
+              color={theme.warning}
+              onClick={this.handleDelete}
+              height="2.4"
+              className="delete-icon"
+            />
+          )}
+        </Row>
+      )
     )
   }
 }

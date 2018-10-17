@@ -6,11 +6,11 @@ import TransactionRow from '../TransactionRow'
 
 jest.mock('utils/api', () => {
   const mock = {}
-  const categoryResponse = [{ category: null }]
+  const transactionResponse = [{ category: null }]
   function reset() {
     Object.assign(mock, {
-      categories: Object.assign(mock.categories || {}, {
-        delete: jest.fn(() => Promise.resolve(categoryResponse)),
+      transactions: Object.assign(mock.categories || {}, {
+        delete: jest.fn(() => Promise.resolve(transactionResponse)),
       }),
       reset,
     })
@@ -120,10 +120,15 @@ describe('interaction', () => {
     const deleteButton = getByLabelText(/delete/i)
     const { _id: fakeId } = props.item
     fireEvent.click(deleteButton)
-    expect(apiMock.categories.delete).toHaveBeenCalledTimes(1)
-    expect(apiMock.categories.delete).toHaveBeenCalledWith(fakeId)
+    expect(apiMock.transactions.delete).toHaveBeenCalledTimes(1)
+    expect(apiMock.transactions.delete).toHaveBeenCalledWith(fakeId)
   })
-  it('should delete the transaction from the page when the delete button is pressed', () => {})
+  it('should delete the transaction from the page when the delete button is pressed', () => {
+    const { getByLabelText, queryByLabelText } = setup({ readOnly: false })
+    const deleteButton = getByLabelText(/delete/i)
+    fireEvent.click(deleteButton)
+    expect(queryByLabelText('table-amount')).toBeFalsy()
+  })
 })
 
 describe('lifecycle', () => {})
