@@ -96,7 +96,6 @@ const Row = styled.div`
   }
 
   &.editable {
-    padding: 1rem 1.5rem;
     grid-template-columns: repeat(3, minmax(12.5rem, 1fr)) 10rem 2rem 2rem;
 
     ${media.tabletPort`
@@ -184,7 +183,7 @@ const Amount = styled(AmountInput)`
     grid-column: 3;
     justify-self: right;
     margin-right: 1rem;
-    font-size: 1.4rem;
+    font-size: 2rem;
   `};
 `
 const Notes = styled(TextArea)`
