@@ -9,7 +9,7 @@ exports.createTransaction = async (req, res) => {
 }
 
 exports.getTransactions = async (req, res) => {
-  const transactions = await Transaction.find({})
+  const transactions = await Transaction.find({}).sort('-date')
   // TODO get categories from db
   // const categories = await
   /**

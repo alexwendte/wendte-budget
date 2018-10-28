@@ -1,15 +1,38 @@
-// Keep googlin wy I am getting this error
+const mongoose = require('mongoose')
 
-exports.getCategories = (req, res) => {
-  // TODO get categories from db
-  // const categories = await
-  /**
-   * TODO Need to only return the categories corresponding to the user
-   * TODO I should do this by using the req.user's id as a db query
-   */
+const User = mongoose.model('User')
+
+exports.createCategory = async (req, res) => {
+  // TODO add a category to the current user
+  const category = ['hi']
+  if (category) {
+    return res.json({ category })
+  }
+  return res.status(404).send()
+}
+
+exports.getCategories = async (req, res) => {
+  // TODO return the categories associated with the current user
   const categories = ['Groceries', 'Brianna a Babe']
   if (categories) {
     return res.json({ categories })
+  }
+  return res.status(404).send()
+}
+
+exports.updateCategory = async (req, res) => {
+  // TODO update the specified category for the user
+  const category = ['hi']
+  if (category) {
+    return res.json({ category })
+  }
+  return res.status(404).send()
+}
+exports.deleteCategory = async (req, res) => {
+  // TODO delete the specified category from the user.
+  const category = ['hi']
+  if (category) {
+    return res.json({ category })
   }
   return res.status(404).send()
 }
