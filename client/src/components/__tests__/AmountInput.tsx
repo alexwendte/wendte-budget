@@ -18,7 +18,6 @@ const setup = (propOverrides?: IProps) => {
     amountInput,
     props,
     ...utils,
-    input,
   }
 }
 
