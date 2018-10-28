@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1540243865227" clover="3.2.0">
+  <project timestamp="1540243865227" name="All files">
+    <metrics statements="288" coveredstatements="206" conditionals="136" coveredconditionals="83" methods="109" coveredmethods="66" elements="533" coveredelements="355" complexity="0" loc="288" ncloc="288" packages="4" files="16" classes="16">
+      <package name="src">
+        <metrics statements="78" coveredstatements="51" conditionals="39" coveredconditionals="29" methods="23" coveredmethods="13"/>
+        <file name="App.tsx" path="C:\Alex\Web-Dev\Git-Repositories\wendte-budget\client\src\App.tsx">
+          <metrics statements="23" coveredstatements="16" conditionals="5" coveredconditionals="2" methods="4" coveredmethods="1"/>
+          <line num="2" count="1" type="stmt"/>
+          <line num="3" count="1" type="stmt"/>
+          <line num="4" count="1" type="stmt"/>
+          <line num="5" count="1" type="stmt"/>
+          <line num="6" count="1" type="stmt"/>
+          <line num="7" count="1" type="stmt"/>
+          <line num="8" count="1" type="stmt"/>
+          <line num="9" count="1" type="stmt"/>
+          <line num="10" count="1" type="stmt"/>
+          <line num="11" count="1" type="stmt"/>
+          <line num="20" count="1" type="stmt"/>
+          <line num="21" count="1" type="stmt"/>
+          <line num="23" count="0" type="cond" truecount="0" falsecount="3"/>
+          <line num="24" count="0" type="stmt"/>
+          <line num="27" count="0" type="stmt"/>
+          <line num="30" count="1" type="stmt"/>
+          <line num="31" count="0" type="stmt"/>
+          <line num="32" count="0" type="stmt"/>
+          <line num="35" count="0" type="stmt"/>
+          <line num="36" count="0" type="stmt"/>
+          <line num="41" count="1" type="stmt"/>
+          <line num="43" count="1" type="stmt"/>
+          <line num="44" count="1" type="cond" truecount="2" falsecount="0"/>
+        </file>
+        <file name="BudgetTool.js" path="C:\Alex\Web-Dev\Git-Repositories\wendte-budget\client\src\BudgetTool.js">
+          <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+          <line num="11" count="0" type="stmt"/>
+        </file>
+        <file name="ItemForm.tsx" path="C:\Alex\Web-Dev\Git-Repositories\wendte-budget\client\src\ItemForm.tsx">
+          <metrics statements="44" coveredstatements="35" conditionals="34" coveredconditionals="27" methods="17" coveredmethods="12"/>
+          <line num="2" count="2" type="stmt"/>
+          <line num="3" count="2" type="stmt"/>
+          <line num="4" count="2" type="stmt"/>
+          <line num="5" count="2" type="stmt"/>
+          <line num="6" count="2" type="stmt"/>
+          <line num="7" count="2" type="stmt"/>
+          <line num="8" count="2" type="stmt"/>
+          <line num="9" count="2" type="stmt"/>
+          <line num="10" count="2" type="stmt"/>
+          <line num="12" count="1" type="cond" truecount="3" falsecount="0"/>
+          <line num="14" count="2" type="stmt"/>
+          <line num="15" count="1" type="stmt"/>
+          <line num="16" count="1" type="stmt"/>
+          <line num="19" count="1" type="stmt"/>
+          <line num="20" count="1" type="stmt"/>
+          <line num="23" count="0" type="stmt"/>
+          <line num="25" count="2" type="stmt"/>
+          <line num="26" count="2" type="stmt"/>
+          <line num="27" count="2" type="stmt"/>
+          <line num="28" count="2" type="cond" truecount="0" falsecount="2"/>
+          <line num="29" count="2" type="stmt"/>
+          <line num="30" count="0" type="stmt"/>
+          <line num="31" count="0" type="stmt"/>
+          <line num="32" count="0" type="stmt"/>
+          <line num="33" count="0" type="stmt"/>
+          <line num="34" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="35" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="36" count="0" type="stmt"/>
+          <line num="46" count="2" type="stmt"/>
+          <line num="59" count="0" type="stmt"/>
+          <line num="75" count="2" type="stmt"/>
+          <line num="78" count="2" type="stmt"/>
+          <line num="80" count="2" type="stmt"/>
+          <line num="81" count="2" type="cond" truecount="2" falsecount="0"/>
+          <line num="82" count="4" type="cond" truecount="2" falsecount="0"/>
+          <line num="83" count="2" type="cond" truecount="2" falsecount="0"/>
+          <line num="84" count="24" type="cond" truecount="2" falsecount="0"/>
+          <line num="85" count="2" type="cond" truecount="2" falsecount="0"/>
+          <line num="86" count="2" type="cond" truecount="2" falsecount="0"/>
+          <line num="87" count="2" type="cond" truecount="2" falsecount="0"/>
+          <line num="88" count="2" type="cond" truecount="2" falsecount="0"/>
+          <line num="89" count="4" type="cond" truecount="2" falsecount="0"/>
+          <line num="90" count="4" type="cond" truecount="2" falsecount="0"/>
+          <line num="91" count="4" type="cond" truecount="2" falsecount="0"/>
+        </file>
+        <file name="index.tsx" path="C:\Alex\Web-Dev\Git-Repositories\wendte-budget\client\src\index.tsx">
+          <metrics statements="10" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="1" count="0" type="stmt"/>
+          <line num="2" count="0" type="stmt"/>
+          <line num="3" count="0" type="stmt"/>
+          <line num="4" count="0" type="stmt"/>
+          <line num="5" count="0" type="stmt"/>
+          <line num="6" count="0" type="stmt"/>
+          <line num="7" count="0" type="stmt"/>
+          <line num="8" count="0" type="stmt"/>
+          <line num="10" count="0" type="stmt"/>
+          <line num="11" count="0" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.components">
+        <metrics statements="80" coveredstatements="79" conditionals="44" coveredconditionals="40" methods="30" coveredmethods="25"/>
+        <file name="AmountInput.tsx" path="C:\Alex\Web-Dev\Git-Repositories\wendte-budget\client\src\components\AmountInput.tsx">
+          <metrics statements="53" coveredstatements="53" conditionals="38" coveredconditionals="36" methods="10" coveredmethods="9"/>
+          <line num="3" count="5" type="stmt"/>
+          <line num="4" count="5" type="stmt"/>
+          <line num="5" count="5" type="stmt"/>
+          <line num="6" count="5" type="stmt"/>
+          <line num="7" count="5" type="stmt"/>
+          <line num="8" count="5" type="stmt"/>
+          <line num="9" count="5" type="stmt"/>
+          <line num="10" count="5" type="stmt"/>
+          <line num="12" count="28" type="cond" truecount="3" falsecount="0"/>
+          <line num="13" count="28" type="stmt"/>
+          <line num="17" count="28" type="stmt"/>
+          <line num="18" count="19" type="stmt"/>
+          <line num="19" count="19" type="stmt"/>
+          <line num="20" count="19" type="stmt"/>
+          <line num="21" count="19" type="cond" truecount="4" falsecount="0"/>
+          <line num="22" count="2" type="stmt"/>
+          <line num="24" count="19" type="cond" truecount="2" falsecount="0"/>
+          <line num="25" count="1" type="stmt"/>
+          <line num="27" count="19" type="cond" truecount="2" falsecount="0"/>
+          <line num="28" count="19" type="cond" truecount="2" falsecount="0"/>
+          <line num="29" count="1" type="stmt"/>
+          <line num="31" count="19" type="cond" truecount="2" falsecount="0"/>
+          <line num="32" count="19" type="cond" truecount="2" falsecount="0"/>
+          <line num="33" count="5" type="stmt"/>
+          <line num="35" count="19" type="stmt"/>
+          <line num="36" count="19" type="cond" truecount="5" falsecount="0"/>
+          <line num="37" count="2" type="stmt"/>
+          <line num="39" count="17" type="cond" truecount="2" falsecount="0"/>
+          <line num="41" count="19" type="stmt"/>
+          <line num="43" count="28" type="stmt"/>
+          <line num="44" count="19" type="stmt"/>
+          <line num="45" count="19" type="stmt"/>
+          <line num="46" count="19" type="stmt"/>
+          <line num="47" count="19" type="cond" truecount="2" falsecount="0"/>
+          <line num="49" count="8" type="stmt"/>
+          <line num="50" count="8" type="stmt"/>
+          <line num="54" count="11" type="stmt"/>
+          <line num="57" count="28" type="stmt"/>
+          <line num="58" count="4" type="stmt"/>
+          <line num="59" count="4" type="stmt"/>
+          <line num="60" count="4" type="stmt"/>
+          <line num="61" count="4" type="cond" truecount="2" falsecount="0"/>
+          <line num="62" count="1" type="stmt"/>
+          <line num="64" count="3" type="stmt"/>
+          <line num="67" count="28" type="stmt"/>
+          <line num="69" count="5" type="stmt"/>
+          <line num="70" count="69" type="stmt"/>
+          <line num="71" count="69" type="stmt"/>
+          <line num="72" count="69" type="cond" truecount="4" falsecount="2"/>
+          <line num="74" count="5" type="stmt"/>
+          <line num="83" count="5" type="stmt"/>
+          <line num="85" count="5" type="stmt"/>
+          <line num="86" count="5" type="cond" truecount="2" falsecount="0"/>
+        </file>
+        <file name="Input.jsx" path="C:\Alex\Web-Dev\Git-Repositories\wendte-budget\client\src\components\Input.jsx">
+          <metrics statements="6" coveredstatements="5" conditionals="4" coveredconditionals="2" methods="3" coveredmethods="2"/>
+          <line num="23" count="2" type="stmt"/>
+          <line num="24" count="2" type="stmt"/>
+          <line num="28" count="82" type="stmt"/>
+          <line num="29" count="82" type="stmt"/>
+          <line num="30" count="82" type="stmt"/>
+          <line num="35" count="0" type="cond" truecount="0" falsecount="2"/>
+        </file>
+        <file name="TextArea.js" path="C:\Alex\Web-Dev\Git-Repositories\wendte-budget\client\src\components\TextArea.js">
+          <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="2"/>
+          <line num="23" count="2" type="stmt"/>
+          <line num="24" count="2" type="stmt"/>
+          <line num="28" count="5" type="stmt"/>
+          <line num="29" count="5" type="stmt"/>
+        </file>
+        <file name="User.js" path="C:\Alex\Web-Dev\Git-Repositories\wendte-budget\client\src\components\User.js">
+          <metrics statements="17" coveredstatements="17" conditionals="0" coveredconditionals="0" methods="14" coveredmethods="12"/>
+          <line num="11" count="6" type="stmt"/>
+          <line num="12" count="6" type="stmt"/>
+          <line num="14" count="6" type="stmt"/>
+          <line num="18" count="2" type="stmt"/>
+          <line num="19" count="2" type="stmt"/>
+          <line num="21" count="1" type="stmt"/>
+          <line num="25" count="1" type="stmt"/>
+          <line num="26" count="1" type="stmt"/>
+          <line num="30" count="2" type="stmt"/>
+          <line num="31" count="2" type="stmt"/>
+          <line num="33" count="1" type="stmt"/>
+          <line num="37" count="22" type="stmt"/>
+          <line num="38" count="22" type="stmt"/>
+          <line num="39" count="22" type="stmt"/>
+          <line num="43" count="28" type="stmt"/>
+          <line num="44" count="28" type="stmt"/>
+          <line num="53" count="2" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.transactionDisplay">
+        <metrics statements="39" coveredstatements="39" conditionals="10" coveredconditionals="10" methods="22" coveredmethods="22"/>
+        <file name="TransactionDisplay.js" path="C:\Alex\Web-Dev\Git-Repositories\wendte-budget\client\src\transactionDisplay\TransactionDisplay.js">
+          <metrics statements="16" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="9" coveredmethods="9"/>
+          <line num="23" count="2" type="stmt"/>
+          <line num="27" count="4" type="stmt"/>
+          <line num="28" count="4" type="stmt"/>
+          <line num="33" count="4" type="stmt"/>
+          <line num="48" count="16" type="stmt"/>
+          <line num="58" count="2" type="stmt"/>
+          <line num="62" count="2" type="stmt"/>
+          <line num="68" count="4" type="stmt"/>
+          <line num="79" count="2" type="stmt"/>
+          <line num="86" count="4" type="stmt"/>
+          <line num="110" count="2" type="stmt"/>
+          <line num="114" count="2" type="stmt"/>
+          <line num="117" count="8" type="stmt"/>
+          <line num="126" count="2" type="stmt"/>
+          <line num="127" count="4" type="stmt"/>
+          <line num="130" count="2" type="stmt"/>
+        </file>
+        <file name="TransactionRow.js" path="C:\Alex\Web-Dev\Git-Repositories\wendte-budget\client\src\transactionDisplay\TransactionRow.js">
+          <metrics statements="23" coveredstatements="23" conditionals="10" coveredconditionals="10" methods="13" coveredmethods="13"/>
+          <line num="18" count="1" type="cond" truecount="2" falsecount="0"/>
+          <line num="22" count="26" type="stmt"/>
+          <line num="23" count="26" type="stmt"/>
+          <line num="24" count="26" type="stmt"/>
+          <line num="48" count="3" type="stmt"/>
+          <line num="53" count="3" type="stmt"/>
+          <line num="61" count="26" type="stmt"/>
+          <line num="66" count="26" type="stmt"/>
+          <line num="80" count="3" type="stmt"/>
+          <line num="82" count="78" type="stmt"/>
+          <line num="86" count="78" type="stmt"/>
+          <line num="98" count="3" type="stmt"/>
+          <line num="99" count="3" type="stmt"/>
+          <line num="105" count="26" type="stmt"/>
+          <line num="108" count="3" type="stmt"/>
+          <line num="114" count="26" type="stmt"/>
+          <line num="117" count="3" type="stmt"/>
+          <line num="124" count="26" type="stmt"/>
+          <line num="136" count="26" type="stmt"/>
+          <line num="145" count="3" type="stmt"/>
+          <line num="146" count="1" type="stmt"/>
+          <line num="147" count="1" type="stmt"/>
+          <line num="160" count="3" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.utils">
+        <metrics statements="91" coveredstatements="37" conditionals="43" coveredconditionals="4" methods="34" coveredmethods="6"/>
+        <file name="api.ts" path="C:\Alex\Web-Dev\Git-Repositories\wendte-budget\client\src\utils\api.ts">
+          <metrics statements="50" coveredstatements="12" conditionals="23" coveredconditionals="0" methods="27" coveredmethods="0"/>
+          <line num="2" count="1" type="stmt"/>
+          <line num="3" count="1" type="stmt"/>
+          <line num="4" count="1" type="stmt"/>
+          <line num="7" count="1" type="stmt"/>
+          <line num="8" count="1" type="stmt"/>
+          <line num="9" count="1" type="stmt"/>
+          <line num="10" count="0" type="stmt"/>
+          <line num="11" count="0" type="stmt"/>
+          <line num="12" count="0" type="stmt"/>
+          <line num="13" count="0" type="stmt"/>
+          <line num="15" count="1" type="stmt"/>
+          <line num="17" count="0" type="stmt"/>
+          <line num="18" count="0" type="stmt"/>
+          <line num="19" count="0" type="stmt"/>
+          <line num="23" count="0" type="stmt"/>
+          <line num="24" count="0" type="stmt"/>
+          <line num="27" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="28" count="0" type="stmt"/>
+          <line num="30" count="0" type="stmt"/>
+          <line num="31" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="32" count="0" type="stmt"/>
+          <line num="35" count="0" type="stmt"/>
+          <line num="39" count="0" type="stmt"/>
+          <line num="40" count="0" type="stmt"/>
+          <line num="41" count="0" type="stmt"/>
+          <line num="45" count="1" type="stmt"/>
+          <line num="46" count="0" type="stmt"/>
+          <line num="47" count="0" type="stmt"/>
+          <line num="48" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="49" count="0" type="stmt"/>
+          <line num="51" count="1" type="stmt"/>
+          <line num="52" count="0" type="stmt"/>
+          <line num="53" count="0" type="stmt"/>
+          <line num="54" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="55" count="0" type="stmt"/>
+          <line num="58" count="1" type="stmt"/>
+          <line num="59" count="0" type="stmt"/>
+          <line num="60" count="0" type="stmt"/>
+          <line num="61" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="62" count="0" type="stmt"/>
+          <line num="65" count="0" type="stmt"/>
+          <line num="66" count="0" type="stmt"/>
+          <line num="69" count="0" type="stmt"/>
+          <line num="70" count="0" type="stmt"/>
+          <line num="71" count="0" type="stmt"/>
+          <line num="74" count="0" type="cond" truecount="0" falsecount="11"/>
+          <line num="75" count="0" type="stmt"/>
+          <line num="76" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="78" count="1" type="stmt"/>
+          <line num="85" count="1" type="stmt"/>
+        </file>
+        <file name="colors.js" path="C:\Alex\Web-Dev\Git-Repositories\wendte-budget\client\src\utils\colors.js">
+          <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="1" count="0" type="stmt"/>
+          <line num="8" count="0" type="stmt"/>
+        </file>
+        <file name="fakeData.ts" path="C:\Alex\Web-Dev\Git-Repositories\wendte-budget\client\src\utils\fakeData.ts">
+          <metrics statements="7" coveredstatements="5" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>
+          <line num="2" count="2" type="stmt"/>
+          <line num="3" count="2" type="stmt"/>
+          <line num="34" count="2" type="stmt"/>
+          <line num="35" count="2" type="stmt"/>
+          <line num="36" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="37" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="39" count="2" type="stmt"/>
+        </file>
+        <file name="mixins.ts" path="C:\Alex\Web-Dev\Git-Repositories\wendte-budget\client\src\utils\mixins.ts">
+          <metrics statements="27" coveredstatements="17" conditionals="16" coveredconditionals="4" methods="4" coveredmethods="4"/>
+          <line num="2" count="5" type="stmt"/>
+          <line num="4" count="5" type="cond" truecount="2" falsecount="2"/>
+          <line num="5" count="5" type="cond" truecount="1" falsecount="4"/>
+          <line num="7" count="0" type="stmt"/>
+          <line num="9" count="0" type="stmt"/>
+          <line num="11" count="5" type="stmt"/>
+          <line num="13" count="0" type="stmt"/>
+          <line num="15" count="0" type="stmt"/>
+          <line num="18" count="5" type="stmt"/>
+          <line num="20" count="2" type="stmt"/>
+          <line num="21" count="2" type="cond" truecount="1" falsecount="6"/>
+          <line num="23" count="0" type="stmt"/>
+          <line num="25" count="0" type="stmt"/>
+          <line num="27" count="0" type="stmt"/>
+          <line num="29" count="2" type="stmt"/>
+          <line num="31" count="0" type="stmt"/>
+          <line num="33" count="0" type="stmt"/>
+          <line num="35" count="0" type="stmt"/>
+          <line num="38" count="5" type="stmt"/>
+          <line num="39" count="5" type="stmt"/>
+          <line num="52" count="5" type="stmt"/>
+          <line num="53" count="20" type="stmt"/>
+          <line num="54" count="29" type="stmt"/>
+          <line num="55" count="29" type="stmt"/>
+          <line num="56" count="29" type="stmt"/>
+          <line num="58" count="29" type="stmt"/>
+          <line num="60" count="20" type="stmt"/>
+        </file>
+        <file name="types.ts" path="C:\Alex\Web-Dev\Git-Repositories\wendte-budget\client\src\utils\types.ts">
+          <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="1" count="0" type="stmt"/>
+          <line num="2" count="0" type="stmt"/>
+        </file>
+        <file name="utils.ts" path="C:\Alex\Web-Dev\Git-Repositories\wendte-budget\client\src\utils\utils.ts">
+          <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+          <line num="2" count="6" type="stmt"/>
+          <line num="3" count="10" type="stmt"/>
+          <line num="4" count="29" type="stmt"/>
+        </file>
+      </package>
+    </metrics>
+  </project>
+</coverage>

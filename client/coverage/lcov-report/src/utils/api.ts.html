@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/utils/api.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\..\prettify.css" />
+    <link rel="stylesheet" href="..\..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\..\index.html">All files</a> / <a href="index.html">src/utils</a> api.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">21.05% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>12/57</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/23</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/27</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">24% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>12/50</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import axios from 'axios'
+&nbsp;
+let api: any
+let isLoggedIn: boolean
+const envBaseURL = process.env.REACT_APP_API_URL
+&nbsp;
+const getData = (res: { data: JSON }) =&gt; res.data
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+interface IRequests {
+  delete: (u<span class="fstat-no" title="function not covered" >rl</span>: string) =&gt; Pr<span class="cstat-no" title="statement not covered" >omise&lt;any&gt;</span>
+  get: (u<span class="fstat-no" title="function not covered" >rl</span>: string) =&gt; Pr<span class="cstat-no" title="statement not covered" >omise&lt;any&gt;</span>
+  post: (u<span class="fstat-no" title="function not covered" >rl</span>: string, body: objec<span class="cstat-no" title="statement not covered" >t) =&gt; Promise&lt;any&gt;</span>
+  put: (u<span class="fstat-no" title="function not covered" >rl</span>: string, body: objec<span class="cstat-no" title="statement not covered" >t) =&gt; Promise&lt;any&gt;</span>
+}
+&nbsp;
+const reque<span class="fstat-no" title="function not covered" >st</span>s: IRequests = {
+  delete<span class="cstat-no" title="statement not covered" >: (url: string) =&gt; api.delete(url).then(getData<span class="fstat-no" title="function not covered" >),</span></span>
+  get: (url:<span class="cstat-no" title="statement not covered" > string) =&gt; api.get(url).then(getDa</span>ta),
+  post: (url<span class="cstat-no" title="statement not covered" >: string, bod</span>y: object) =&gt; api.post(url, body).then(getData),
+  put: (url: string, body: object) =&gt; api.put(url, body).then(getData),
+}
+<span class="fstat-no" title="function not covered" ></span>
+interfac<span class="cstat-no" title="statement not covered" >e IUser {</span>
+  token:<span class="cstat-no" title="statement not covered" > string</span>
+}
+<span class="fstat-no" title="function not covered" ></span>
+const au<span class="cstat-no" title="statement not covered" >th = {</span>
+  login: (fo<span class="cstat-no" title="statement not covered" >rm: object) =&gt;</span>
+    requests.post('/auth/login', form).then((data: { user: IUser }) =&gt; {
+      lo<span class="cstat-no" title="statement not covered" >gin({ token: data.user.token })<span class="fstat-no" title="function not covered" ></span></span>
+      return<span class="cstat-no" title="statement not covered" > data</span>
+    }),<span class="cstat-no" title="statement not covered" ></span>
+  logout: () =&gt; {
+    logout()
+    return P<span class="cstat-no" title="statement not covered" >romise.resolve({ user: null </span>})
+  },
+  me() {
+    if (!isLog<span class="fstat-no" title="function not covered" >ge</span>dIn) {
+      re<span class="cstat-no" title="statement not covered" >turn Promise.resolve({ user: null })<span class="fstat-no" title="function not covered" ></span></span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+    return r<span class="cstat-no" title="statement not covered" >equests.get('</span>/auth/me').catch((err: any) =&gt; {
+      if (err.response.status === 401) {
+        logout()
+        // return { user: null }
+      }
+      return<span class="fstat-no" title="function not covered" > P</span>romise.reject(er<span class="cstat-no" title="statement not covered" >r)</span>
+    })<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+  },<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+  register: <span class="fstat-no" title="function not covered" >(f</span>orm: any) =&gt;<span class="cstat-no" title="statement not covered" ></span>
+    requests.post('/auth/register', form).then(data =&gt; {
+      login({ token: data.user.token })
+      return<span class="fstat-no" title="function not covered" > d</span>ata<span class="cstat-no" title="statement not covered" ></span>
+    }),<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+}<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+const users = {
+  create: (user: object) =&gt; requests.post('/users', user),
+  delete: (id: string) =&gt; requests.delete(`/users/${id}`),
+  get: (id?:<span class="fstat-no" title="function not covered" > s</span>tring) =&gt; reques<span class="cstat-no" title="statement not covered" >ts.get(id ? `/users/${id}` : '/users'),</span>
+  update: (i<span class="fstat-no" title="function not covered" >d:</span> string, updat<span class="cstat-no" title="statement not covered" >es: any) =&gt; requests.put(`/users/${id}`, upda</span>tes),
+}<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+const transactions = {
+  create:<span class="fstat-no" title="function not covered" > (trans</span>action: object) =&gt; requests.post('/transactions', transaction),
+  de<span class="cstat-no" title="statement not covered" >lete: (id: string) =&gt; requests.delete(`/t</span>ransactions/${id}`),
+  ge<span class="cstat-no" title="statement not covered" >t: (id?: string) =&gt; req</span>uests.get(id ? `/transactions/${id}` : '/transactions'),
+  update: (id: string, updates: any) =&gt; requests.put(`/transactions/${id}`, updates),
+}<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+// I<span class="cstat-no" title="statement not covered" >n the server api can use req.user.id to get t</span>he categories associated with a user
+cons<span class="cstat-no" title="statement not covered" >t categories = {</span>
+  create: (post: object) =&gt; requests.post('/categories', post),
+  delete:<span class="fstat-no" title="function not covered" > (id:</span> string) =&gt; requests.delete(`/categories/${id}`),
+  get: (id?: <span class="cstat-no" title="statement not covered" >string) =&gt; requests.get(</span>id ? `<span class="cstat-no" title="statement not covered" >/categori</span>es/${id}`<span class="cstat-no" title="statement not covered" > : '/categories'),<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span></span>
+  up<span class="cstat-no" title="statement not covered" >date: (id: string, updates: a</span>ny) =&gt; requests.put(`/categories/${id}`, updates),
+}<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+function logout() {
+  window.localStorage.removeItem('token')
+  init({ token: null })
+}
+function login({ token }: { token: string }) {
+  window.localStorage.setItem('token', token)
+  init({ token })
+}
+&nbsp;
+function init({
+  token = window.localStorage.getItem('token'),
+  baseURL = (api &amp;&amp; api.defaults.baseURL) || envBaseURL,
+  axiosOptions = { headers: {} },
+} = {}) {
+  isLoggedIn = Boolean(token)
+  api = axios.create({
+    baseURL,
+    ...axiosOptions,
+    headers: {
+      authorization: token ? `Bearer ${token}` : undefined,
+      ...axiosOptions.headers,
+    },
+  })
+}
+&nbsp;
+const restApi = {
+  auth,
+  categories,
+  init,
+  transactions,
+  users,
+}
+&nbsp;
+export default restApi
+&nbsp;
+// export { init, users, transactions, categories, auth }
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Oct 22 2018 16:31:05 GMT-0500 (Central Daylight Time)
+</div>
+</div>
+<script src="..\..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\..\sorter.js"></script>
+</body>
+</html>

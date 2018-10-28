@@ -1,0 +1,16 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "build/dist",
+    "module": "esnext",
+    "target": "es5",
+    "lib": ["es6", "dom"],
+    "paths": {
+      "*": ["src/*"]
+    },
+    "jsx": "react",
+    "rootDir": "./src"
+  },
+  "exclude": ["build", "node_modules", "coverage", "**/*.js"]
+}
