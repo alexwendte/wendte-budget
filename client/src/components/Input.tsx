@@ -1,3 +1,4 @@
+import { useFormInput } from 'hooks/hooks'
 import * as React from 'react'
 
 interface IProps {
@@ -7,36 +8,14 @@ interface IProps {
   'aria-label'?: string
 }
 
-interface IState {
-  value: string
+const Input: React.SFC<IProps> = ({ readOnly, ...rest }) => {
+  const value = useFormInput(rest.value || '')
+
+  return <input {...rest} {...value} onClick={ev => !readOnly && ev.stopPropagation()} readOnly={readOnly} />
+}
+Input.defaultProps = {
+  readOnly: false,
+  value: undefined,
 }
 
-export default class Input extends React.Component<IProps, IState> {
-  static defaultProps = {
-    readOnly: false,
-    value: undefined,
-  }
-
-  state = {
-    value: this.props.value || '',
-  }
-
-  handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = ev.currentTarget
-    this.setState({ value })
-  }
-
-  render() {
-    const { readOnly, ...rest } = this.props
-    const { value } = this.state
-    return (
-      <input
-        {...rest}
-        onChange={this.handleChange}
-        value={value}
-        onClick={ev => !readOnly && ev.stopPropagation()}
-        readOnly={readOnly}
-      />
-    )
-  }
-}
+export default Input

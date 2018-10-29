@@ -10,24 +10,16 @@ interface IProps {
   closeClicked: () => void
 }
 
-class Flash extends React.Component<IProps, {}> {
-  static defaultProps = {
-    error: undefined,
-    fixed: false,
-    successMessage: '',
-  }
-
-  render() {
-    const { successMessage: sm, error, submitted, fixed, closeClicked } = this.props
-    const successMessage = sm as string
-    return (
-      <>
-        <Transition
-          from={{ opacity: 0, height: 0 }}
-          enter={{ opacity: 1, height: 'auto' }}
-          leave={{ opacity: 0, height: 0 }}
-        >
-          {submitted && !error && successMessage.length > 0
+const Flash: React.SFC<IProps> = ({ successMessage: sm, error, submitted, fixed, closeClicked }) => {
+  const successMessage = sm as string
+  return (
+    <>
+      <Transition
+        from={{ opacity: 0, height: 0 }}
+        enter={{ opacity: 1, height: 'auto' }}
+        leave={{ opacity: 0, height: 0 }}
+        children={
+          submitted && !error && successMessage.length > 0
             ? ({ opacity, height }) => (
                 <ResponseSuccess
                   data-testid="create-success"
@@ -37,25 +29,31 @@ class Flash extends React.Component<IProps, {}> {
                   <Message>{successMessage}</Message>
                 </ResponseSuccess>
               )
-            : false}
-        </Transition>
-        <Transition
-          from={{ opacity: 0, height: 0 }}
-          enter={{ opacity: 1, height: 'auto' }}
-          leave={{ opacity: 0, height: 0 }}
-        >
-          {error
+            : false
+        }
+      />
+      <Transition
+        from={{ opacity: 0, height: 0 }}
+        enter={{ opacity: 1, height: 'auto' }}
+        leave={{ opacity: 0, height: 0 }}
+        children={
+          error
             ? ({ opacity, height }) => (
                 <ResponseError data-testid="create-error" className={fixed ? 'fixed' : ''} style={{ opacity, height }}>
                   <Message className="message">{error}</Message>
                   <Close onClick={closeClicked}>X</Close>
                 </ResponseError>
               )
-            : false}
-        </Transition>
-      </>
-    )
-  }
+            : false
+        }
+      />
+    </>
+  )
+}
+Flash.defaultProps = {
+  error: undefined,
+  fixed: false,
+  successMessage: '',
 }
 
 export default Flash
