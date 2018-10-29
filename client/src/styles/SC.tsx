@@ -22,3 +22,13 @@ export const InputGroup = styled.div`
     background: ${props => props.theme.lightGrey};
   }
 `
+
+export const Button = styled.button`
+  border-radius: 5px;
+  color: ${props => props.theme.white};
+  background: ${props => props.theme.primary};
+  border: none;
+  padding: 1rem 1.5rem;
+  font-weight: 600;
+  font-size: 1.8rem;
+`

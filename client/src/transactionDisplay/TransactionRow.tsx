@@ -63,28 +63,11 @@ class TransactionRow extends React.Component<IProps, IState> {
             error={error}
             closeClicked={this.flashClosedClicked}
           />
-          <Title type="text" aria-label="table-title" value={title} readOnly={readOnly} />
-          <Dates type="text" aria-label="table-date" value={new Date(date).toDateString()} readOnly={readOnly} />
-          <Category type="text" aria-label="table-category" value={category} readOnly={readOnly} />
-          {
-            <Amount
-              className={`${type} table`}
-              aria-label="table-amount"
-              value={type === 'expense' ? `-$${amount}.00` : `$${amount}.00`}
-              readOnly={readOnly}
-              inTable={true}
-            />
-          }
-          <TableNotes readOnly={readOnly} expanded={expandNotes} notes={notes} aria-label="table-notes" />
-          {!readOnly && (
-            <Delete
-              name="delete"
-              color={theme.warning}
-              onClick={this.handleDelete}
-              height="2.4"
-              className="delete-icon"
-            />
-          )}
+          <Title>{title} </Title>
+          <Dates>{new Date(date).toDateString()}</Dates>
+          <Category>{category}</Category>
+          {<Amount>{type === 'expense' ? `-$${amount}.00` : `$${amount}.00`}</Amount>}
+          <TableNotes expanded={expandNotes} notes={notes} aria-label="table-notes" />
         </Row>
       )
     )
