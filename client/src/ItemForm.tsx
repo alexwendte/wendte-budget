@@ -1,10 +1,10 @@
 import AmountInput from 'components/AmountInput'
 import CategoryInputGroup from 'components/CategoryInputGroup'
+import { Button, InputGroup } from 'components/Elements'
 import Flash from 'components/Flash'
 import TypeInputGroup from 'components/TypeInputGroup'
 import * as React from 'react'
 import styled from 'styled-components'
-import { InputGroup } from 'styles/SC'
 import restApi from 'utils/api'
 import { media } from 'utils/mixins'
 import { IApiError, ITransactionForm, IUser } from 'utils/types'
@@ -117,7 +117,7 @@ class ItemForm extends React.Component<IProps, IState> {
               <label htmlFor="notes">Notes</label>
               <textarea id="notes" name="notes" placeholder="Brianna is my love so I bought her something nice" />
             </NotesInputGroup>
-            <SubmitButton type="submit">Submit</SubmitButton>
+            <Button type="submit">Submit</Button>
           </Form>
         </ItemFormWrapper>
       </>
@@ -174,13 +174,4 @@ const NotesInputGroup = styled(InputGroup)`
     border: none;
   }
   width: 100%;
-`
-const SubmitButton = styled.button`
-  border-radius: 5px;
-  color: ${props => props.theme.white};
-  background: ${props => props.theme.primary};
-  border: none;
-  padding: 1rem 1.5rem;
-  font-weight: 600;
-  font-size: 1.8rem;
 `

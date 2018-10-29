@@ -1,12 +1,11 @@
 import AmountInput from 'components/AmountInput'
-import CategoryInputGroup from 'components/CategoryInputGroup'
+import { Button, InputGroup } from 'components/Elements'
 import Flash from 'components/Flash'
 import Input from 'components/Input'
 import TextArea from 'components/TextArea'
 import TypeInputGroup from 'components/TypeInputGroup'
 import * as React from 'react'
 import styled from 'styled-components'
-import { Button, InputGroup } from 'styles/SC'
 import { ITransaction } from 'utils/types'
 
 const EditTransactionModal: React.SFC<ITransaction> = ({ date, title, category, notes }) => {

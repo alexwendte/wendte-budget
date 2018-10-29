@@ -6,6 +6,7 @@ interface IProps {
   readOnly?: boolean
   type?: string
   'aria-label'?: string
+  id?: string
 }
 
 const Input: React.SFC<IProps> = ({ readOnly, ...rest }) => {
